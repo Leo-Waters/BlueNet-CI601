@@ -2,8 +2,9 @@
 BlueNet is a bluetooth networking solution for unity.
 
 <h4>Features</h4>
+
 - Network Transport utalizing 32feet.net to connect, send and recive data.
-- Network Manager simplifies connecting and hosting games while providing functions and events for managing the game state.
+- Network Manager to simplify connecting and hosting games, while providing functions and events for managing the game state.
 - Network Object component is used to simplify the synchronization of object specific data and sending Remote procedure calls.
 - Network Transform Component provides synchronization of object transforms with perdiction.
 - Network Animator Component simplifies the synchronization of animation states.
