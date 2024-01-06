@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BlueNet/Demo/Test.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/BlueNet/Demo/BeanTown/BeanTown.unity
-    guid: df5bcdd2f7a2f9c4b9637016baf90d5a
   m_configObjects: {}
