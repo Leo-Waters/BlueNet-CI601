@@ -153,27 +153,30 @@ namespace BlueNet.Transports
         //send Messages to client from Message buffer
         public override void Send()
         {
-            var stream = client.GetStream();
-            if (stream.CanWrite)
+            if (Connected)
             {
-                string Data = "";
-
-                while (!Send_Messages.IsEmpty)
+                var stream = client.GetStream();
+                if (stream.CanWrite)
                 {
-                    string message;
-                    if (Send_Messages.TryTake(out message))
+                    string Data = "";
+
+                    while (!Send_Messages.IsEmpty)
                     {
-                        Data += message;
+                        string message;
+                        if (Send_Messages.TryTake(out message))
+                        {
+                            Data += message;
+                        }
                     }
-                }
 
-                if (!string.IsNullOrEmpty(Data))
-                {
-                    var buffer = System.Text.Encoding.UTF8.GetBytes(Data);
-                    stream.Write(buffer, 0, buffer.Length);
-                    TotalBytesSent += buffer.Length;
-                }
+                    if (!string.IsNullOrEmpty(Data))
+                    {
+                        var buffer = System.Text.Encoding.UTF8.GetBytes(Data);
+                        stream.Write(buffer, 0, buffer.Length);
+                        TotalBytesSent += buffer.Length;
+                    }
 
+                }
             }
 
         }

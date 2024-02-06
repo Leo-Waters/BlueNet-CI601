@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BlueNet/Demo/Test.unity
+    path: Assets/BlueNet/Demo/Menu/DemoMenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/BlueNet/Demo/BeanTown/BeanTown.unity
+    guid: df5bcdd2f7a2f9c4b9637016baf90d5a
+  - enabled: 1
+    path: Assets/BlueNet/Demo/PongDemo/PongDemo.unity
+    guid: 261e0721e42f0064d869dc72cb47c02f
   m_configObjects: {}
