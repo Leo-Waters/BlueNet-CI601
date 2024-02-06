@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
 
-namespace LeoWaters.android.bluetooth
+namespace BlueNet.Android
 {
+    //bluetooth plugin class for android, must be initalized before using clients of listner classes
     public class BluetoothPlugin
     {
         const string PluginName = "com.leowaters.bluetooth.BluetoothPlugin";
@@ -43,6 +44,7 @@ namespace LeoWaters.android.bluetooth
             GetBluetoothClass.CallStatic("Init", activity, appName,uuid_Str);
         }
 
+        //dispose of resources 
         public static void Dispose()
         {
             GetBluetoothClass.CallStatic("Dispose");

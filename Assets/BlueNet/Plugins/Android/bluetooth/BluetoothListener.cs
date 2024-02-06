@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace LeoWaters.android.bluetooth
+namespace BlueNet.Android
 {
+    //bluetooth listener class for hosting a connection on android
     public class BluetoothListener : AndroidJavaProxy {
     
         const string JavaCallbackInterface = "com.leowaters.bluetooth.BluetoothListenerCallbacks";
@@ -13,15 +14,17 @@ namespace LeoWaters.android.bluetooth
         {
             javaObject = new AndroidJavaObject(JavaClass, this);
         }
-
+        
         public event EventHandler<BluetoothClient> OnConnectedToClient;
+        //on connected callback from java class to unity
         public void OnConnected(AndroidJavaObject client)
         {
-            Debug.Log("Connection Successfull, Creatin Client Object");
+            //create a bluetooth client object to represent the android java object and pass to c# event connected
+            Debug.Log("Connection Successfull, Creating Client Object");
             BluetoothClient bluetoothClient = new BluetoothClient(client);
             OnConnectedToClient?.Invoke(this, bluetoothClient);
         }
-
+        
         public void StartListerning()
         {
             javaObject.Call("StartListerning");

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LeoWaters.android.bluetooth
+namespace BlueNet.Android
 {
-
+	//bluetooth client class for android
 	public class BluetoothClient : AndroidJavaProxy
     {
 		const string JavaCallbackInterface = "com.leowaters.bluetooth.BluetoothClientCallback";
