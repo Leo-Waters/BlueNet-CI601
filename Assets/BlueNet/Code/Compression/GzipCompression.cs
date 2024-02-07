@@ -16,7 +16,7 @@ namespace BlueNet.Compression
             {
                 using (var gzipStream = new GZipStream(memoryStream, System.IO.Compression.CompressionLevel.Fastest))
                 {
-                    gzipStream.Write(bytes, 0, bytes.Length);
+                    gzipStream.Write(bytes);
                 }
                 return memoryStream.ToArray();
             }
@@ -26,14 +26,14 @@ namespace BlueNet.Compression
         {
             using (var memoryStream = new MemoryStream(value))
             {
-
-                using (var outputStream = new MemoryStream())
+                using (var decompressStream = new GZipStream(memoryStream, CompressionMode.Decompress))
                 {
-                    using (var decompressStream = new GZipStream(memoryStream, CompressionMode.Decompress))
+                    using (var outputStream = new MemoryStream())
                     {
                         decompressStream.CopyTo(outputStream);
+                        return Encoding.UTF8.GetString(outputStream.ToArray());
                     }
-                    return Encoding.UTF8.GetString(outputStream.ToArray());
+                    
                 }
             }
         }

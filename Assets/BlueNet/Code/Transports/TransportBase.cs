@@ -200,8 +200,20 @@ namespace BlueNet.Transports
                 }
                 else 
                 {
-                    IncomingMessageBuffer[messagebufferindex] = message[i];
-                    messagebufferindex++;
+                    try
+                    {
+                        IncomingMessageBuffer[messagebufferindex] = message[i];
+                        messagebufferindex++;
+                    }
+                    catch
+                    {
+                        Debug.LogError("BufferIndex: "+messagebufferindex);
+                        Debug.LogError("BufferLength: " + IncomingMessageBuffer.Length);
+                        Debug.LogError("Buffer: " + IncomingMessageBuffer);
+                        Debug.LogError("MessageIndex: " + i);
+                        Debug.LogError("MessageLength: " + message.Length);
+                        Debug.LogError("Message: " + message);
+                    }
                     //reached end of buffer, get message and clean up
                     if (IncomingMessageBuffer.Length == messagebufferindex)
                     {

@@ -7777,7 +7777,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NetworkID: 0
   HostIsOwner: 1
-  IsLocalyOwned: 0
   LocalPlayerOnlyBehaviours: []
   SyncVars: []
   VaribleSyncPeriod: 1
@@ -8046,6 +8045,10 @@ PrefabInstance:
     - target: {fileID: 627250570389539423, guid: f340667f7160f9f4495d74b31f08a04c, type: 3}
       propertyPath: DisconectedSceneIndex
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627250570389539423, guid: f340667f7160f9f4495d74b31f08a04c, type: 3}
+      propertyPath: ActiveCompressionAlgorithm
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
