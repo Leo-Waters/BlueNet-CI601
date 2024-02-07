@@ -8,7 +8,7 @@ using System;
 using BlueNet.DataTypes;
 using UnityEngine.Android;
 using BlueNet.Transports;
-
+using BlueNet.Compression;
 namespace BlueNet
 {
     //Provides Functionality for Creating and joining bluetooth Sessions
@@ -47,8 +47,9 @@ namespace BlueNet
         public static event EventHandler OnDisconnected;
         public static event EventHandler OnConnected;
 
-        
 
+        public CompressionAlgorithmType ActiveCompressionAlgorithm=CompressionAlgorithmType.none;
+        public static CompressionBase Compression;
         //used to identify the application
         public int GUID = 1234;
         //scen you want to load on disconnect, -1 = none
@@ -161,7 +162,7 @@ namespace BlueNet
             DontDestroyOnLoad(Instance);
 
             //set the correct network transport base on compiled platform
-            #if UNITY_ANDROID&&!UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
             //requrest permission to use bluetooth for android
             const string bluetooth_permission = "android.permission.BLUETOOTH";
             const string bluetoothAdmin_permission = "android.permission.BLUETOOTH_ADMIN";
@@ -177,8 +178,15 @@ namespace BlueNet
             netTransport = new BlueNetTransportWindows(GUID);
 #endif
 
-        }
+            switch (ActiveCompressionAlgorithm)
+            {
 
+                case CompressionAlgorithmType.none:
+                default:
+                    Compression = new CompressionBase();
+                    break;
+            }
+        }
 
         private void Update()
         {
@@ -235,7 +243,6 @@ namespace BlueNet
         {
             netTransport.SendCommand(new DataTypes.NetworkCommand("SceneChange", BuildIndex.ToString()),true);
         }
-
 
     }
 }

@@ -31,21 +31,11 @@ namespace BlueNet.Transports
         {
             if (Connected)
             {
-                string data = "";
-
-                while (!Send_Messages.IsEmpty)
+                byte[] message = GetMessage();
+                if (message!=null)
                 {
-
-                    if (Send_Messages.TryTake(out string message))
-                    {
-                        data += message;
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(data))
-                {
-                    client.Write(Encoding.ASCII.GetBytes(data));
-                    TotalBytesSent += Encoding.ASCII.GetByteCount(data);
+                    client.Write(message);
+                    TotalBytesSent += message.Length;
                 }
             }
         }
@@ -82,7 +72,7 @@ namespace BlueNet.Transports
         }
 
         //a message has been recived
-        private void Client_onRecivedMessage_Evt(object sender, string e)
+        private void Client_onRecivedMessage_Evt(object sender, byte[] e)
         {
             ProccessMessage(e);
         }

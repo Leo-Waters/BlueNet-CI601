@@ -55,14 +55,14 @@ namespace BlueNet.Android
 		//callbacks-------------------------------------------
 
 		//recived a message from client
-		public event EventHandler<string> onRecivedMessage_Evt;
+		public event EventHandler<byte[]> onRecivedMessage_Evt;
 		//connected to client
 		public event EventHandler onConnected_Evt;
 		//connection was closed
 		public event EventHandler onDisconnect_Evt;
 
 		//onRecivedJavaCallback
-		public void OnRecivedMessage(string message)
+		public void OnRecivedMessage(byte[] message)
 		{
 			onRecivedMessage_Evt?.Invoke(this, message);
 		}

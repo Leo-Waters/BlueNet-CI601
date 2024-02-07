@@ -140,7 +140,10 @@ namespace BlueNet.Transports
                         return;
                     }
 
-                    ProccessMessage(Encoding.ASCII.GetString(ReadBuffer, 0, bytesRead));
+                    byte[] message = new byte[bytesRead];
+                    Array.Copy(ReadBuffer,message,bytesRead);
+
+                    ProccessMessage(message);
 
                 }
             }
@@ -158,22 +161,11 @@ namespace BlueNet.Transports
                 var stream = client.GetStream();
                 if (stream.CanWrite)
                 {
-                    string Data = "";
-
-                    while (!Send_Messages.IsEmpty)
+                    byte[] message = GetMessage();
+                    if (message != null)
                     {
-                        string message;
-                        if (Send_Messages.TryTake(out message))
-                        {
-                            Data += message;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(Data))
-                    {
-                        var buffer = System.Text.Encoding.UTF8.GetBytes(Data);
-                        stream.Write(buffer, 0, buffer.Length);
-                        TotalBytesSent += buffer.Length;
+                        stream.Write(message, 0, message.Length);
+                        TotalBytesSent += message.Length;
                     }
 
                 }

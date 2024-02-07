@@ -101,7 +101,7 @@ namespace BlueNet
         //used by manager to recive and update sync varibles 
         public void ReciveNetworkUpdate(NetworkCommand networkCommand)
         {
-            Debug.LogWarning(networkCommand.ToString());
+            //Debug.LogWarning(networkCommand.ToString());
             string[] args = networkCommand.GetArgs();
             for (int i = 1; i < args.Length; i++)
             {

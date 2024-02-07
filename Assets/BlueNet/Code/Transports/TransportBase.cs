@@ -60,6 +60,38 @@ namespace BlueNet.Transports
 
         }
 
+        //gets the messages to send to the other player as compressed bytes
+        public byte[] GetMessage()
+        {
+            string data = "";
+
+            while (!Send_Messages.IsEmpty)
+            {
+
+                if (Send_Messages.TryTake(out string message))
+                {
+                    data += message;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(data))
+            {
+                byte[] message = BlueNetManager.Compression.Compress(data);
+
+                byte[] messageLength = BitConverter.GetBytes((ushort)message.Length);
+
+                //append message length to front of message, this is to counteract buffer overflow on reciving end
+                byte[] FinalMessage = new byte[message.Length + messageLength.Length];
+                System.Buffer.BlockCopy(messageLength, 0, FinalMessage, 0, messageLength.Length);
+                System.Buffer.BlockCopy(message, 0, FinalMessage, messageLength.Length, message.Length);
+                return FinalMessage;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         //--------------------------------------------------------------------
 
         //listern for a device that wants to join
@@ -130,58 +162,103 @@ namespace BlueNet.Transports
         string CurrentArg = "";
         List<string> CurrentArgs = new List<string>();
         bool GotCommand = false;
-        string OverFlow = "";
 
-        internal void ProccessMessage(string message)
+        //the currently being read message
+        byte[] IncomingMessageBuffer;
+        ushort messagebufferindex=0;
+        string DecompressedMessage="";
+
+        //the length of the current message
+        byte[] messageLength = new byte[2];
+        byte messageLengthIndex=0;
+
+        internal void ProccessMessage(byte[] message) // 5hello 3yes 3bob
         {
-            TotalBytesRead += Encoding.ASCII.GetByteCount(message);
-            //Add OverFlow From Last Network Message
-            string IncomingData = OverFlow + message;
 
-
-            //Debug.Log("Incoming "+IncomingData);
-
-            for (int i = 0; i < IncomingData.Length; i++)
+            DecompressedMessage = string.Empty;
+            TotalBytesRead += message.Length;
+            //first 2 bytes == ushort == length of incoming message
+            //create buffer with length and buffer bytes until length is reached
+            
+            for (int i = 0; i < message.Length; i++)
             {
-                if (IncomingData[i] == '|')
-                {//Reached end of command add to vector
-
-                    CurrentArgs.Add(CurrentArg);//add arg tp list
-                    CurrentArg = string.Empty;//clear added
-
-                    //Debug.Log(CurrentArgs);
-                    NetworkCommands.Add(new NetworkCommand(CurrentCommand, CurrentArgs.ToArray()));
-                    CurrentCommand = "";
-                    CurrentArgs.Clear();
-                    GotCommand = false;
-                    OverFlow = string.Empty;
-                }
-                else
-                {//reading letter by letter
-                    if (GotCommand == false)
+                //get incoming message length and create buffer for the incoming data
+                if (IncomingMessageBuffer==null)
+                {
+                    messageLength[messageLengthIndex] = message[i];
+                    if (messageLengthIndex == 1)
                     {
-                        if (IncomingData[i] == ',')
-                        { //got first arg being the command name
-                            GotCommand = true;
-                        }
-                        else
-                        {
-                            CurrentCommand += IncomingData[i];//append letters until , is reached
-                        }
-
-                    }
-                    else if (IncomingData[i] == ',')
-                    {//got arg
-                        CurrentArgs.Add(CurrentArg);//add arg tp list
-                        CurrentArg = string.Empty;//clear added
+                        //Debug.Log("Creating buffer with size:" + BitConverter.ToUInt16(messageLength).ToString());
+                        IncomingMessageBuffer = new byte[BitConverter.ToUInt16(messageLength)];
+                        messageLengthIndex = 0;
                     }
                     else
                     {
-                        CurrentArg += IncomingData[i];//add chars
+                        messageLengthIndex++;
                     }
-                    OverFlow += IncomingData[i];
+                    continue;
+                }
+                else 
+                {
+                    IncomingMessageBuffer[messagebufferindex] = message[i];
+                    messagebufferindex++;
+                    //reached end of buffer, get message and clean up
+                    if (IncomingMessageBuffer.Length == messagebufferindex)
+                    {
+                        DecompressedMessage += BlueNetManager.Compression.DeCompress(IncomingMessageBuffer);
+                        IncomingMessageBuffer = null;
+                        messagebufferindex = 0;
+                    }
+                }
+
+
+            }
+
+            if (DecompressedMessage != string.Empty)
+            {
+                //Debug.Log("Incoming " + DecompressedMessage);
+
+                for (int i = 0; i < DecompressedMessage.Length; i++)
+                {
+                    if (DecompressedMessage[i] == '|')
+                    {//Reached end of command add to vector
+
+                        CurrentArgs.Add(CurrentArg);//add arg tp list
+                        CurrentArg = string.Empty;//clear added
+
+                        //Debug.Log(CurrentArgs);
+                        NetworkCommands.Add(new NetworkCommand(CurrentCommand, CurrentArgs.ToArray()));
+                        CurrentCommand = "";
+                        CurrentArgs.Clear();
+                        GotCommand = false;
+                    }
+                    else
+                    {//reading letter by letter
+                        if (GotCommand == false)
+                        {
+                            if (DecompressedMessage[i] == ',')
+                            { //got first arg being the command name
+                                GotCommand = true;
+                            }
+                            else
+                            {
+                                CurrentCommand += DecompressedMessage[i];//append letters until , is reached
+                            }
+
+                        }
+                        else if (DecompressedMessage[i] == ',')
+                        {//got arg
+                            CurrentArgs.Add(CurrentArg);//add arg tp list
+                            CurrentArg = string.Empty;//clear added
+                        }
+                        else
+                        {
+                            CurrentArg += DecompressedMessage[i];//add chars
+                        }
+                    }
                 }
             }
+
         }
 
 
