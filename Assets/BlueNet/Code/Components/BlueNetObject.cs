@@ -35,6 +35,7 @@ namespace BlueNet
         {
             if (IsLocalyOwned)
             {
+
                 //timer to send updates of syncvars
                 syncDelay += Time.fixedDeltaTime;
                 if (syncDelay >= VaribleSyncPeriod)

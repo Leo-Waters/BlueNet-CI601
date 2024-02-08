@@ -48,7 +48,9 @@ namespace BlueNet.Android
 		//Send bytes to client
 		public void Write(byte[] data)
 		{
-			javaObject.Call("Write", data);
+			sbyte[] sdata = new sbyte[data.Length];
+			Buffer.BlockCopy(data, 0, sdata, 0, data.Length);
+			javaObject.Call("Write", sdata);
 		}
 
 

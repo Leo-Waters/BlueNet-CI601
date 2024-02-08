@@ -55,6 +55,14 @@ namespace BlueNet
         //scen you want to load on disconnect, -1 = none
         public int DisconectedSceneIndex = -1;
 
+        private float p_ping;
+        public float ping {
+            get
+            {
+                return p_ping;
+            }
+        }
+
         //get paired device list, name and address key value pairs
         public static Dictionary<string, string> GetDevices()
         {
@@ -65,6 +73,7 @@ namespace BlueNet
         public static void StartClient(string deviceAddress)
         {
             netTransport.ConnectToDevice(deviceAddress);
+            Debug.Log(Application.persistentDataPath);
 
         }
         //close client
@@ -190,9 +199,25 @@ namespace BlueNet
                     break;
             }
         }
-
+        //time when the ping was sent
+        float pingSendTime = 0;
+        //time in seconds, in which the ping will be sent
+        float PingSendPeriod = 2;
+        //remainging time until next ping
+        float PingDelay = 0;
         private void Update()
         {
+            if (IsConnected())
+            {
+                PingDelay -= Time.deltaTime;
+                if (PingDelay <= 0)
+                {
+                    pingSendTime = Time.time;
+                    netTransport.SendCommand(new DataTypes.NetworkCommand("RequestPing"), false);
+                    PingDelay = PingSendPeriod;
+                }
+            }
+
             var commands = netTransport.GetCommands();//proccesss recived Data
             foreach (var command in commands)
             {
@@ -208,6 +233,12 @@ namespace BlueNet
 
                     case "ObjectRPC":
                         PropergateRPC(command);
+                        break;
+                    case "RequestPing":
+                        netTransport.SendCommand(new DataTypes.NetworkCommand("ReceivePing"), false);
+                        break;
+                    case "ReceivePing":
+                        p_ping = Time.time - pingSendTime;
                         break;
 
                     default:

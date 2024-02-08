@@ -190,6 +190,7 @@ namespace BlueNet.Transports
                     {
                         //Debug.Log("Creating buffer with size:" + BitConverter.ToUInt16(messageLength).ToString());
                         IncomingMessageBuffer = new byte[BitConverter.ToUInt16(messageLength)];
+                        messagebufferindex = 0;
                         messageLengthIndex = 0;
                     }
                     else
@@ -200,26 +201,13 @@ namespace BlueNet.Transports
                 }
                 else 
                 {
-                    try
-                    {
-                        IncomingMessageBuffer[messagebufferindex] = message[i];
-                        messagebufferindex++;
-                    }
-                    catch
-                    {
-                        Debug.LogError("BufferIndex: "+messagebufferindex);
-                        Debug.LogError("BufferLength: " + IncomingMessageBuffer.Length);
-                        Debug.LogError("Buffer: " + IncomingMessageBuffer);
-                        Debug.LogError("MessageIndex: " + i);
-                        Debug.LogError("MessageLength: " + message.Length);
-                        Debug.LogError("Message: " + message);
-                    }
+                    IncomingMessageBuffer[messagebufferindex] = message[i];
+                    messagebufferindex++;
                     //reached end of buffer, get message and clean up
                     if (IncomingMessageBuffer.Length == messagebufferindex)
                     {
                         DecompressedMessage += BlueNetManager.Compression.DeCompress(IncomingMessageBuffer);
                         IncomingMessageBuffer = null;
-                        messagebufferindex = 0;
                     }
                 }
 
