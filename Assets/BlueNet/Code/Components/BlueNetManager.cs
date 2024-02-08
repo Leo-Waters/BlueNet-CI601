@@ -192,7 +192,9 @@ namespace BlueNet
                 case CompressionAlgorithmType.gzip:
                     Compression = new GzipCompressor();
                     break;
-
+                case CompressionAlgorithmType.deflate:
+                    Compression = new DeflateCompressor();
+                    break;
                 case CompressionAlgorithmType.none:
                 default:
                     Compression = new CompressionBase();
