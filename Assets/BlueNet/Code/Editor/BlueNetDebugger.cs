@@ -5,6 +5,7 @@ using UnityEditor;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System;
 
 namespace BlueNet {
     public class BlueNetDebugger : EditorWindow
@@ -17,6 +18,7 @@ namespace BlueNet {
         string WorkingDirectory = Application.dataPath + "/BlueNet/Code/Editor/BluetoothCompressionGraph/";
         const string pythonScript = "BluetoothCompressionDataGraph.py";
 
+        BlueNet.Compression.GzipCompressor compressor = new Compression.GzipCompressor();
         string[] Tests;
         private void OnFocus()
         {
@@ -133,13 +135,13 @@ namespace BlueNet {
 
             GUILayout.Label("Selected Test project: "+SelectedTest, EditorStyles.boldLabel);
 
-            if (isLogging)
+            if (isLogging&& BlueNetManager.Instance != null)
             {
                 GUILayout.Label("Time since logging started: " + TimeElapsed.ToString()+" / "+ MaxlogTimeInSeconds);
                 GUILayout.Label("Total Bytes Sent: ");
                 GUILayout.Label("Total Bytes Recived: ");
                 GUILayout.Label("Total Object Updates Recived: ");
-
+                GUILayout.Label("Ping: "+ BlueNetManager.Instance.ping * 1000+" ms");
                 GUILayout.Label("FPS", EditorStyles.boldLabel);
                 currentFPS = (int)(1.0f / Time.smoothDeltaTime);
                 GUILayout.Label("Current FPS: "+ currentFPS);
@@ -192,6 +194,23 @@ namespace BlueNet {
 
                 start.UseShellExecute = true;
                 Process.Start(start);
+            }
+
+
+            if (GUILayout.Button("TestComp"))
+            {
+                
+                UnityEngine.Debug.LogWarning(compressor.DeCompress(File.ReadAllBytes("C:/Users/r2leo/Desktop/failedToSendBytes.txt")));
+                return;
+                for (int i = 0; i < 10; i++)
+                {
+                    string mess = "ObjectRPC,4,RpcRotation,0*8.500002*0|ObjectRPC,4,RpcPosition,46.97995*1.58*-58.40401|ObjectRPC,4,RpcUpdateAnimations,y,1,-2,x,1,0|";
+
+                    UnityEngine.Debug.LogWarning("size of mess before" + System.Text.Encoding.UTF8.GetBytes(mess).Length);
+                    var comp = compressor.Compress(mess);
+                    UnityEngine.Debug.LogWarning("size of mess after" + comp.Length);
+                    compressor.DeCompress(comp);
+                }
             }
         }
 

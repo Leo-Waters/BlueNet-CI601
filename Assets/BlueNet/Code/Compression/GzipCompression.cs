@@ -24,17 +24,29 @@ namespace BlueNet.Compression
         }
         public override string DeCompress(byte[] value)
         {
-            using (var memoryStream = new MemoryStream(value))
+            try
             {
-                using (var decompressStream = new GZipStream(memoryStream, CompressionMode.Decompress))
+                using (var memoryStream = new MemoryStream(value))
                 {
-                    using (var outputStream = new MemoryStream())
+                    using (var decompressStream = new GZipStream(memoryStream, CompressionMode.Decompress))
                     {
-                        decompressStream.CopyTo(outputStream);
-                        return Encoding.UTF8.GetString(outputStream.ToArray());
+                        using (var outputStream = new MemoryStream())
+                        {
+                            decompressStream.CopyTo(outputStream);
+                            return Encoding.UTF8.GetString(outputStream.ToArray());
+                        }
+
                     }
-                    
                 }
+            }
+            catch
+            {
+                string path = "/storage/emulated/0/Android/data/com.DefaultCompany.CI601BlueNet/files/failedToSendBytes.txt";
+                File.WriteAllBytes(path, value);
+
+
+                Debug.Log(value);
+                return "error|";
             }
         }
     }
