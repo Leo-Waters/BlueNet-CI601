@@ -2,7 +2,7 @@ import random
 raw=""
 comp=""
 
-minutes=10
+minutes=1
 
 direction=True
 
@@ -26,16 +26,16 @@ for x in range(60*minutes):
 
     
     if(raw==""):
-        raw+=str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))
+        raw+=str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))+" "+str(random.randint(58,65))
     else:
-        raw+="\n"+str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))
+        raw+="\n"+str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))+" "+str(random.randint(58,65))
 
     sent=round(sent/2)
     recived=round(recived/2)
     if(comp==""):
-        comp+=str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))
+        comp+=str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))+" "+str(random.randint(58,65))
     else:
-        comp+="\n"+str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))
+        comp+="\n"+str(sent)+" "+str(recived)+" 10 "+str(random.randint(58,60))+" "+str(random.randint(58,65))
 
 
 f = open("Comp_Data.txt", "w")

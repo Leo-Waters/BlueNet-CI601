@@ -50,6 +50,7 @@ namespace BlueNet {
         void StartLogging()
         {
             PerformanceDebugger.ResetStatistics();
+            Application.targetFrameRate = 60;
             highestFPS = 0;
             lowestFPS = 1000;
             isLogging = true;
@@ -67,7 +68,7 @@ namespace BlueNet {
                     int objectUpdates = PerformanceDebugger.TotalObjectUpdatesSinceLastCheck();
 
                     TimeElapsed++;
-                    writer.WriteLine(string.Format("{0} {1} {2} {3}", sentBytes, recivedBytes, objectUpdates, currentFPS));
+                    writer.WriteLine(string.Format("{0} {1} {2} {3} {4}", sentBytes, recivedBytes, objectUpdates, currentFPS, BlueNetManager.Instance.ping * 1000));
                     if (TimeElapsed == MaxlogTimeInSeconds)
                     {
                         isLogging = false;
@@ -144,6 +145,10 @@ namespace BlueNet {
                 GUILayout.Label("Ping: "+ BlueNetManager.Instance.ping * 1000+" ms");
                 GUILayout.Label("FPS", EditorStyles.boldLabel);
                 currentFPS = (int)(1.0f / Time.smoothDeltaTime);
+                if (currentFPS > 60)
+                {
+                    currentFPS = 60;
+                }
                 GUILayout.Label("Current FPS: "+ currentFPS);
 
                 if (currentFPS > highestFPS)
@@ -184,8 +189,6 @@ namespace BlueNet {
             }
 
 
-
-
             if (isLogging==false&&GUILayout.Button("Show Graph")) {
                 ProcessStartInfo start = new ProcessStartInfo();
                 start.FileName = "py";
@@ -196,22 +199,6 @@ namespace BlueNet {
                 Process.Start(start);
             }
 
-
-            if (GUILayout.Button("TestComp"))
-            {
-                
-                UnityEngine.Debug.LogWarning(compressor.DeCompress(File.ReadAllBytes("C:/Users/r2leo/Desktop/failedToSendBytes.txt")));
-                return;
-                for (int i = 0; i < 10; i++)
-                {
-                    string mess = "ObjectRPC,4,RpcRotation,0*8.500002*0|ObjectRPC,4,RpcPosition,46.97995*1.58*-58.40401|ObjectRPC,4,RpcUpdateAnimations,y,1,-2,x,1,0|";
-
-                    UnityEngine.Debug.LogWarning("size of mess before" + System.Text.Encoding.UTF8.GetBytes(mess).Length);
-                    var comp = compressor.Compress(mess);
-                    UnityEngine.Debug.LogWarning("size of mess after" + comp.Length);
-                    compressor.DeCompress(comp);
-                }
-            }
         }
 
 
