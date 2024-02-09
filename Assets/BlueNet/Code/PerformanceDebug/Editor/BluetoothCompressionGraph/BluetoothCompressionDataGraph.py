@@ -43,7 +43,7 @@ def LoadDataFromFile(path):
         sent.append(sentI)
         objUpdates.append(int(row[2])) 
         fps.append(int(row[3]))
-        latency.append(int(row[4]))
+        latency.append(float(row[4]))
 
     
         
@@ -151,5 +151,17 @@ plt.subplots_adjust(left=0.1,
                     top=0.9, 
                     wspace=0.4, 
                     hspace=0.4)
+
+
+
+
+#print averages
+for data in TestDataSets:
+  totalread=0
+  for r in data.read:
+    totalread=totalread+r
+
+  average=totalread/len(data.read)
+  print(data.name+" Average Bytes Sent Per Second: "+str(average))
 
 plt.show()

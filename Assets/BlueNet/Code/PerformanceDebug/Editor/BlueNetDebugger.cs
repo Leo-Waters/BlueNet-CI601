@@ -68,7 +68,7 @@ namespace BlueNet {
                     int objectUpdates = PerformanceDebugger.TotalObjectUpdatesSinceLastCheck();
 
                     TimeElapsed++;
-                    writer.WriteLine(string.Format("{0} {1} {2} {3} {4}", sentBytes, recivedBytes, objectUpdates, currentFPS, BlueNetManager.Instance.ping * 1000));
+                    writer.WriteLine(string.Format("{0} {1} {2} {3} {4}", sentBytes, recivedBytes, objectUpdates, currentFPS, (int)MathF.Round(BlueNetManager.Instance.ping * 1000) ));
                     if (TimeElapsed == MaxlogTimeInSeconds)
                     {
                         isLogging = false;
