@@ -207,6 +207,8 @@ namespace BlueNet
         float PingSendPeriod = 2;
         //remainging time until next ping
         float PingDelay = 0;
+
+        public static int ObjectUpdatesRecived=0;
         private void Update()
         {
             if (IsConnected())
@@ -231,10 +233,12 @@ namespace BlueNet
                         break;
                     case "ObjectUpdate":
                         UpdateNetworkObject(command);
+                        ObjectUpdatesRecived++;
                         break;
 
                     case "ObjectRPC":
                         PropergateRPC(command);
+                        ObjectUpdatesRecived++;
                         break;
                     case "RequestPing":
                         netTransport.SendCommand(new DataTypes.NetworkCommand("ReceivePing"), false);

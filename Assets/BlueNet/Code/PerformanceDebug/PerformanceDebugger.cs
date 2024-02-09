@@ -11,22 +11,37 @@ namespace BlueNet
         //reset debug info and log from current time
         public static void ResetStatistics()
         {
-            BlueNetTransportBase.TotalBytesRead = BlueNetTransportBase.TotalBytesSent = ObjectUpdates = 0;
-            DebugTimeStart = Time.realtimeSinceStartup;
+            BlueNetTransportBase.TotalBytesRead = BlueNetTransportBase.TotalBytesSent= BlueNetManager.ObjectUpdatesRecived= 0;
+            BytesReadLast = BytesSentLast = ObjectUpdatesLast = 0;
         }
-        public static float DebugTimeStart;
-
-        public static int ObjectUpdates;
-
-
-        //returns the average object updates per second since last statistic reset
-        public static float AverageObjectUpdatesPerSecond { get { return ObjectUpdates / Time.realtimeSinceStartup - DebugTimeStart; } }
-        //returns the average bytes read per second since last statistic reset
-        public static float AverageBytesReadPerSecond { get { return BlueNetTransportBase.TotalBytesRead / Time.realtimeSinceStartup - DebugTimeStart; } }
-        //returns the average bytes sent per second since last statistic reset
-        public static float AverageBytesSentPerSecond { get { return BlueNetTransportBase.TotalBytesSent / Time.realtimeSinceStartup - DebugTimeStart; } }
+        public static int TotalObjectUpdates{get{return BlueNetManager.ObjectUpdatesRecived;}}
+        public static int TotalBytesSent { get { return BlueNetTransportBase.TotalBytesSent; } }
+        public static int TotalBytesRead { get { return BlueNetTransportBase.TotalBytesRead; } }
 
 
-        //----------------------------------------------------------
+        //------get change functions, used for logging data-----
+
+        private static int BytesReadLast, BytesSentLast, ObjectUpdatesLast;
+        //returns how many bytes have been read since the last time this function was called
+        public static int TotalBytesReadSinceLastCheck()
+        {
+            int Diff = TotalBytesRead - BytesReadLast;
+            BytesReadLast = TotalBytesRead;
+            return Diff;
+        }
+        //returns how many bytes have been seny since the last time this function was called
+        public static int TotalBytesSentSinceLastCheck()
+        {
+            int Diff = TotalBytesSent - BytesSentLast;
+            BytesSentLast = TotalBytesSent;
+            return Diff;
+        }
+        //returns how many object updates have been executed since the last time this function was called
+        public static int TotalObjectUpdatesSinceLastCheck()
+        {
+            int Diff = TotalObjectUpdates - ObjectUpdatesLast;
+            ObjectUpdatesLast = TotalObjectUpdates;
+            return Diff;
+        }
     }
 }

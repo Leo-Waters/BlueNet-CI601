@@ -50,11 +50,6 @@ for root, dirs, files in os.walk(workingDir):
             fullpath = os.path.join(root, f)
             print("Loading :"+f)
             TestDataSets.append(LoadDataFromFile(fullpath))
-
-
-rawData=LoadDataFromFile(workingDir+"/Full_Size_Data.txt")
-compData=LoadDataFromFile(workingDir+"/Comp_Data.txt")
-
 fig = plt.figure()
 
 BytesSentGraph = fig.add_subplot(411,label = "Bytes Sent",ylabel='Bytes')
