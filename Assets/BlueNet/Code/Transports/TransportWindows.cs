@@ -104,7 +104,7 @@ namespace BlueNet.Transports
             StartReadThread();
         }
         //closes connection to client
-        public override void CloseConnection()  { client.Close();  base.CloseConnection();  }
+        public override void CloseConnection()  { NetworkReadThread.Abort();  client.Close();  ThreadSafeEvents.Add("disconnected"); base.CloseConnection();  }
         
         //start read and write background threads for data transmision
         void StartReadThread()

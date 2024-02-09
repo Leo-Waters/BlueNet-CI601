@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using BlueNet;
-public class BeanAI : MonoBehaviour
-{
-    public BlueNetObject netObject;
-    public NavMeshAgent agent;
-
-    public Transform[] Waypoints;
-
-    private void Update()
+namespace BlueNet.Demos {
+    public class BeanAI : MonoBehaviour
     {
-        if (netObject.IsLocalyOwned)
+        public BlueNetObject netObject;
+        public NavMeshAgent agent;
+
+        public Transform[] Waypoints;
+        public SyncedAnimator animator;
+        private void Update()
         {
-            if(agent.hasPath==false|| agent.remainingDistance < 2)
+            if (netObject.IsLocalyOwned)
             {
-                agent.SetDestination(Waypoints[Random.Range(0, Waypoints.Length)].position);
+                if (agent.hasPath == false || agent.remainingDistance < 2)
+                {
+                    agent.SetDestination(Waypoints[Random.Range(0, Waypoints.Length)].position);
+
+                }
+                animator.SetFloat("y", agent.velocity.z);
+                animator.SetFloat("x", agent.velocity.x);
             }
         }
     }

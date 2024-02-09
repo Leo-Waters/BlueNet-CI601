@@ -1431,7 +1431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1484,6 +1484,10 @@ PrefabInstance:
     - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: NetworkID
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: HostIsOwner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8307643003828213041, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: Waypoints.Array.size
@@ -7725,7 +7729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -15387,7 +15391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -15440,6 +15444,10 @@ PrefabInstance:
     - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: NetworkID
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: HostIsOwner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8307643003828213041, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: Waypoints.Array.size
@@ -16101,7 +16109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -16154,6 +16162,10 @@ PrefabInstance:
     - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: NetworkID
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: HostIsOwner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8307643003828213041, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: Waypoints.Array.size
@@ -18814,7 +18826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -18866,7 +18878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: NetworkID
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8307643003828213041, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: Waypoints.Array.size
@@ -19183,14 +19195,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeanAI (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348765, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -19201,7 +19205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348765, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7123604
+      value: 1.493
       objectReference: {fileID: 0}
     - target: {fileID: 854014357686348765, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19240,9 +19244,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8307643003828213041, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
-      propertyPath: Waypoints.Array.size
-      value: 15
-      objectReference: {fileID: 0}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 854014357925315945}
     - target: {fileID: 8307643003828213041, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: Waypoints.Array.data[0]
       value: 
@@ -19306,6 +19310,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+--- !u!114 &854014357925315945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3699188290535668652, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+  m_PrefabInstance: {fileID: 854014357925315944}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a029166dcaf59ee4fb50f4ae9beb34f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9026015765007065418
 PrefabInstance:
   m_ObjectHideFlags: 0

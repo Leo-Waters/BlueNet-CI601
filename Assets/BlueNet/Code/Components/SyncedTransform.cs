@@ -34,14 +34,14 @@ namespace BlueNet{
             RotationEuler = transform.rotation.eulerAngles;
         }
         float UpdateDelay = 0;
-
+        public float TimeSinceLastMove;
         private void Update()
         {
             if (!netObject.IsLocalyOwned)
             {
                 if (UsePositionPerdiction)
                 {
-                    float TimeSinceLastMove = Time.time - LastPositionTime;
+                    TimeSinceLastMove = ((Time.time - LastPositionTime)/ UpdateRate);
                     //simulate movement
                     transform.position = Vector3.Lerp(LastPosition, PredictedPosition, TimeSinceLastMove);
                 }
@@ -60,8 +60,13 @@ namespace BlueNet{
                     //has the position changed, if true send update
                     if (transform.position != LastPosition)
                     {
-                        PredictedPosition= LastPosition = transform.position;
-                        netObject.SendRPC("RpcPosition", false, Converters.Vector3ToString(LastPosition));
+                        //perdict where this object might be by the time its recived
+                        Vector3 diff = (transform.position - LastPosition);
+                        diff *= BlueNetManager.Instance.ping;
+
+                        PredictedPosition = LastPosition = transform.position;
+
+                        netObject.SendRPC("RpcPosition", false, Converters.Vector3ToString(LastPosition+ diff));
 
                     }
                     //has the rotation changed, is true send update
@@ -88,12 +93,16 @@ namespace BlueNet{
             Vector3 CurrentPosition = Converters.Vector3FromString(Pos_S[0]);
             if (UsePositionPerdiction)
             {
+                //out of sync-- snap back to know location 
+                if (Vector3.Distance(transform.position, CurrentPosition) > TeleportDistance)
+                {
+                    PredictedPosition = transform.position = CurrentPosition;
+                }
+
                 //Update last position
-                LastPosition = transform.transform.position;
+                LastPosition = transform.position;
 
                 Vector3 diff = (CurrentPosition - LastPosition);
-
-                //TODO -- compensate current position network delay add diff * response delay
 
                 //predict next move based on new position and last
                 Vector3 Prediction = CurrentPosition + diff;
@@ -102,12 +111,6 @@ namespace BlueNet{
                 PredictedPosition = Prediction;
                 //used to lerp between last and new location
                 LastPositionTime = Time.time;
-
-                //out of sync-- snap back to know location 
-                if (Vector3.Distance(transform.position, CurrentPosition) > TeleportDistance)
-                {
-                    //LastPerdiction= PredictedPosition=transform.position = CurrentPosition;
-                }
             }
             else
             {

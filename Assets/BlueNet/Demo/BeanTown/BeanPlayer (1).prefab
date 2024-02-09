@@ -52,11 +52,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NetworkID: 5
   HostIsOwner: 1
-  IsLocalyOwned: 0
   LocalPlayerOnlyBehaviours:
   - {fileID: 5500536752536055821}
   - {fileID: 8633582059583320040}
   - {fileID: 7798032382552878473}
+  SyncVars: []
+  VaribleSyncPeriod: 1
 --- !u!114 &550511433184310452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,9 +72,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LastPosition: {x: 0, y: 0, z: 0}
   PredictedPosition: {x: 0, y: 0, z: 0}
-  UpdateRate: 0.5
-  LastPositionTime: 0
-  TeleportDistance: 2
+  UpdateRate: 0.2
+  TeleportDistance: 10
+  UsePositionPerdiction: 1
+  TimeSinceLastMove: 0
 --- !u!114 &5500536752536055821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,7 +90,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5546122317992880794}
   cameraTrans: {fileID: 3959895289264224806}
-  MoveSpeed: 5
+  walkSpeed: 1
+  RunSpeed: 2
   LookSpeed: 2
   UpDownClamp: {x: -25, y: 50}
   animator: {fileID: 5623908116742859464}
@@ -123,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5388676586060524523}
+  VaribleSyncPeriod: 1
 --- !u!1 &7260478116459650380
 GameObject:
   m_ObjectHideFlags: 0
