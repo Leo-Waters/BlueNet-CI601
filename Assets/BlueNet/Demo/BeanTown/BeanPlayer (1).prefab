@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89af65773ac3ea459cbf5e8133133b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NetworkID: 5
+  NetworkID: 7
   HostIsOwner: 1
   LocalPlayerOnlyBehaviours:
   - {fileID: 5500536752536055821}
@@ -75,6 +75,8 @@ MonoBehaviour:
   UpdateRate: 0.2
   TeleportDistance: 10
   UsePositionPerdiction: 1
+  sendVelocity: 1
+  velocity: {x: 0, y: 0, z: 0}
   TimeSinceLastMove: 0
 --- !u!114 &5500536752536055821
 MonoBehaviour:
@@ -89,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5546122317992880794}
+  syncedTransform: {fileID: 550511433184310452}
   cameraTrans: {fileID: 3959895289264224806}
   walkSpeed: 1
   RunSpeed: 2

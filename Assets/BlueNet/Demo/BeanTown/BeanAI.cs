@@ -11,6 +11,7 @@ namespace BlueNet.Demos {
 
         public Transform[] Waypoints;
         public SyncedAnimator animator;
+        public SyncedTransform SyncedTransform;
         private void Update()
         {
             if (netObject.IsLocalyOwned)
@@ -22,6 +23,7 @@ namespace BlueNet.Demos {
                 }
                 animator.SetFloat("y", agent.velocity.z);
                 animator.SetFloat("x", agent.velocity.x);
+                SyncedTransform.velocity = agent.velocity;
             }
         }
     }

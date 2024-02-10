@@ -105,6 +105,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   animator: {fileID: 3699188290535668652}
+  SyncedTransform: {fileID: -6070990984305652218}
 --- !u!114 &6012141681075004243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89af65773ac3ea459cbf5e8133133b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NetworkID: 2
+  NetworkID: 7
   HostIsOwner: 1
   LocalPlayerOnlyBehaviours: []
   SyncVars: []
@@ -139,6 +140,8 @@ MonoBehaviour:
   UpdateRate: 0.2
   TeleportDistance: 10
   UsePositionPerdiction: 1
+  sendVelocity: 1
+  velocity: {x: 0, y: 0, z: 0}
   TimeSinceLastMove: 0
 --- !u!114 &3699188290535668652
 MonoBehaviour:

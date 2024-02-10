@@ -7,6 +7,7 @@ namespace BlueNet.Demo
     public class BeanPlayerControler : MonoBehaviour
     {
         public CharacterController controller;
+        public SyncedTransform syncedTransform;
         public Transform cameraTrans;
 
         public float walkSpeed = 1;
@@ -72,6 +73,7 @@ namespace BlueNet.Demo
             move += transform.forward * Dir.y * MoveSpeed;
 
             controller.SimpleMove(move);
+            syncedTransform.velocity=controller.velocity;
         }
 
     }

@@ -12,8 +12,11 @@ namespace BlueNet{
         public Vector3 LastPosition;
         public Vector3 PredictedPosition;
 
+        
+
         Vector3 RotationEuler;
         Vector3 Scale;
+
 
         //time in seconds that updates should be sent, lower the number the more acurate the position.
         [Range(0.1f,2)]
@@ -24,8 +27,12 @@ namespace BlueNet{
 
         public float TeleportDistance = 2;
 
-        //should the position be perdicted between updates, false = snappy movement
+        //should the position be perdicted between updates, false = delayed movement
+        [Header("Perdict the objects position between updates")]
         public bool UsePositionPerdiction=true;
+        //Send velocity instead of perdict the velocity
+        public bool sendVelocity = false;
+        public Vector3 velocity;
 
         private void Start()
         {
@@ -60,13 +67,26 @@ namespace BlueNet{
                     //has the position changed, if true send update
                     if (transform.position != LastPosition)
                     {
-                        //perdict where this object might be by the time its recived
-                        Vector3 diff = (transform.position - LastPosition);
-                        diff *= BlueNetManager.Instance.ping;
+                        Vector3 diff;
+                        if (sendVelocity)
+                        {
+                            diff = velocity;
+                            diff *= (BlueNetManager.Instance.ping/2);
+                            PredictedPosition = LastPosition = transform.position;
+                            netObject.SendRPC("RpcPosition", false, Converters.Vector3ToString(LastPosition + diff),Converters.Vector3ToString(velocity));
+                        }
+                        else
+                        {
+                            //perdict where this object might be by the time its recived
+                            diff = (transform.position - LastPosition);
+                            diff *= (BlueNetManager.Instance.ping / 2);
 
-                        PredictedPosition = LastPosition = transform.position;
+                            PredictedPosition = LastPosition = transform.position;
+                            netObject.SendRPC("RpcPosition", false, Converters.Vector3ToString(LastPosition + diff));
+                        }
+                        
 
-                        netObject.SendRPC("RpcPosition", false, Converters.Vector3ToString(LastPosition+ diff));
+
 
                     }
                     //has the rotation changed, is true send update
@@ -101,8 +121,16 @@ namespace BlueNet{
 
                 //Update last position
                 LastPosition = transform.position;
-
-                Vector3 diff = (CurrentPosition - LastPosition);
+                Vector3 diff;
+                if (sendVelocity)
+                {
+                     diff = Converters.Vector3FromString(Pos_S[1])* UpdateDelay;
+                }
+                else
+                {
+                     diff = (CurrentPosition - LastPosition);
+                }
+                
 
                 //predict next move based on new position and last
                 Vector3 Prediction = CurrentPosition + diff;
@@ -114,7 +142,7 @@ namespace BlueNet{
             }
             else
             {
-                transform.position = CurrentPosition;
+                PredictedPosition = CurrentPosition;
             }
 
         }

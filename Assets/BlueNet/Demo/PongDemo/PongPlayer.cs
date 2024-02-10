@@ -9,6 +9,7 @@ namespace BlueNet.Demos.pong
     {
         public BlueNetObject netObj;
         public Rigidbody2D physics;
+        public SyncedTransform syncedTransform;
         public float Speed = 5;
 
         private void Start()
@@ -22,6 +23,7 @@ namespace BlueNet.Demos.pong
         {
             if (netObj.IsLocalyOwned)
             {
+                
 
                 if (Input.GetMouseButton(0))
                 {
@@ -31,7 +33,7 @@ namespace BlueNet.Demos.pong
                 {
                     MoveTowards(Input.touches[0].position);
                 }
-
+                syncedTransform.velocity = physics.velocity;
             }
         }
 
@@ -40,6 +42,7 @@ namespace BlueNet.Demos.pong
             var pos= Camera.main.ScreenToWorldPoint(screenPos);
 
             Vector3 dir = (pos - transform.position)* Speed;
+            dir.x = 0;
             physics.velocity = dir;
         }
     }

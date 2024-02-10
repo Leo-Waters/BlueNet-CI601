@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 37956238}
   - component: {fileID: 37956237}
   - component: {fileID: 37956239}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,12 +252,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   netObj: {fileID: 37956234}
   physics: {fileID: 37956237}
+  syncedTransform: {fileID: 37956239}
   speed: 3
   player1Score_Text: {fileID: 1750106996}
   player2Score_Text: {fileID: 2057934442}
   Winner_Text: {fileID: 823073948}
   GameOveMenu: {fileID: 176275156}
   readyButton: {fileID: 103669257}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!50 &37956237
 Rigidbody2D:
   serializedVersion: 4
@@ -312,6 +316,8 @@ MonoBehaviour:
   UpdateRate: 0.1
   TeleportDistance: 5
   UsePositionPerdiction: 1
+  sendVelocity: 1
+  velocity: {x: 0, y: 0, z: 0}
   TimeSinceLastMove: 0
 --- !u!1 &103669257
 GameObject:
@@ -458,7 +464,7 @@ GameObject:
   - component: {fileID: 174834250}
   - component: {fileID: 174834253}
   - component: {fileID: 174834252}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ball (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360842548}
   - component: {fileID: 360842549}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -762,7 +768,7 @@ GameObject:
   - component: {fileID: 491216016}
   - component: {fileID: 491216019}
   - component: {fileID: 491216018}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ball (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1173,6 +1179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   netObj: {fileID: 762270900}
   physics: {fileID: 762270903}
+  syncedTransform: {fileID: 762270904}
   Speed: 5
 --- !u!61 &762270902
 BoxCollider2D:
@@ -1238,6 +1245,8 @@ MonoBehaviour:
   UpdateRate: 0.1
   TeleportDistance: 5
   UsePositionPerdiction: 1
+  sendVelocity: 1
+  velocity: {x: 0, y: 0, z: 0}
   TimeSinceLastMove: 0
 --- !u!1 &816516232
 GameObject:
@@ -1638,7 +1647,7 @@ GameObject:
   - component: {fileID: 1037958079}
   - component: {fileID: 1037958082}
   - component: {fileID: 1037958081}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ball (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1829,6 +1838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   netObj: {fileID: 1078920092}
   physics: {fileID: 1078920095}
+  syncedTransform: {fileID: 1078920096}
   Speed: 5
 --- !u!61 &1078920094
 BoxCollider2D:
@@ -1894,6 +1904,8 @@ MonoBehaviour:
   UpdateRate: 0.1
   TeleportDistance: 5
   UsePositionPerdiction: 1
+  sendVelocity: 1
+  velocity: {x: 0, y: 0, z: 0}
   TimeSinceLastMove: 0
 --- !u!1 &1135988490
 GameObject:
@@ -1906,7 +1918,7 @@ GameObject:
   - component: {fileID: 1135988491}
   - component: {fileID: 1135988494}
   - component: {fileID: 1135988493}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ball (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2209,7 +2221,7 @@ GameObject:
   - component: {fileID: 1480184572}
   - component: {fileID: 1480184575}
   - component: {fileID: 1480184574}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ball (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

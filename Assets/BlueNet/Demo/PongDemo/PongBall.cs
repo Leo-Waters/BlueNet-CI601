@@ -9,6 +9,7 @@ namespace BlueNet.Demos.pong {
     {
         public BlueNetObject netObj;
         public Rigidbody2D physics;
+        public SyncedTransform syncedTransform;
         public float speed=1;
         int SideHits;
         int player1Score = 0, player2Score = 0;
@@ -52,6 +53,7 @@ namespace BlueNet.Demos.pong {
             Ready2 = true;
         }
 
+        public LayerMask mask;
         private void FixedUpdate()
         {
             if (Ready1 && Ready2)
@@ -59,10 +61,25 @@ namespace BlueNet.Demos.pong {
                 StartGame();
             }
 
-            if (netObj.IsLocalyOwned && (player1Score >= 5 || player2Score >= 5))
+            if (netObj.IsLocalyOwned)
             {
-                PauseGame(player2Score >= 5);
+                if (Physics2D.Raycast(transform.position, physics.velocity, physics.velocity.magnitude, mask))
+                {
+                    //going to hit object so perdict needs inverse velocity
+                    syncedTransform.velocity = -(physics.velocity);
+                }
+                else
+                {
+                    syncedTransform.velocity = physics.velocity;
+                }
+                
+                if ((player1Score >= 5 || player2Score >= 5))
+                {
+                    PauseGame(player2Score >= 5);
+                }
+               
             }
+
         }
 
         void StartGame()

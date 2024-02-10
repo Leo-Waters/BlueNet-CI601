@@ -8527,7 +8527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: NetworkID
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8307643003828213041, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: Waypoints.Array.size
@@ -16161,7 +16161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: NetworkID
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6012141681075004243, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: HostIsOwner
@@ -19122,6 +19122,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 550511433184310452, guid: 9e5afc4e7cf13544cac292b982daac0a, type: 3}
+      propertyPath: sendVelocity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1346493336226580757, guid: 9e5afc4e7cf13544cac292b982daac0a, type: 3}
       propertyPath: m_text
       value: 'Player 1
