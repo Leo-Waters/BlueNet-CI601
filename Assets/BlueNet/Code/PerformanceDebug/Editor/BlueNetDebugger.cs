@@ -97,6 +97,12 @@ namespace BlueNet {
         int highestFPS=0,lowestFPS=1000,currentFPS=0;
         private void OnGUI()
         {
+            if(GUILayout.Button("test comp"))
+            {
+                var comp = new BlueNet.Compression.StringCompressor();
+                comp.Test();
+            }
+
             GUILayout.Label("Create New Test", EditorStyles.boldLabel);
 
             GUILayout.BeginHorizontal();

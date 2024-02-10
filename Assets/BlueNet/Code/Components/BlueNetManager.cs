@@ -195,6 +195,9 @@ namespace BlueNet
                 case CompressionAlgorithmType.deflate:
                     Compression = new DeflateCompressor();
                     break;
+                case CompressionAlgorithmType.customString:
+                    Compression = new StringCompressor();
+                    break;
                 case CompressionAlgorithmType.none:
                 default:
                     Compression = new CompressionBase();

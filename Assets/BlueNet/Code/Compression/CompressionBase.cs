@@ -12,7 +12,8 @@ namespace BlueNet.Compression
     {
         none=0,
         gzip=1,
-        deflate=2
+        deflate=2,
+        customString=3
     }
 
     public class CompressionBase
