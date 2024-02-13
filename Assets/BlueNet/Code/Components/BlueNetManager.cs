@@ -187,7 +187,13 @@ namespace BlueNet
             netTransport = new BlueNetTransportWindows(GUID);
 #endif
 
-            switch (ActiveCompressionAlgorithm)
+           
+            SetCompressionAlgoithm(ActiveCompressionAlgorithm);
+        }
+
+        void SetCompressionAlgoithm(CompressionAlgorithmType type)
+        {
+            switch (type)
             {
                 case CompressionAlgorithmType.gzip:
                     Compression = new GzipCompressor();
@@ -250,6 +256,9 @@ namespace BlueNet
                         p_ping = Time.time - pingSendTime;
                         break;
 
+                    case "compressionSwitch":
+                        SetCompressionAlgoithm((CompressionAlgorithmType)Enum.Parse(typeof(CompressionAlgorithmType),command.GetString(0)));
+                        break;
                     default:
                         Debug.Log("Recived Command with no Proccess:" + command.GetCommand());
                         break;

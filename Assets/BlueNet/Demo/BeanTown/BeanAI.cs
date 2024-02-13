@@ -9,6 +9,8 @@ namespace BlueNet.Demos {
         public BlueNetObject netObject;
         public NavMeshAgent agent;
 
+        public bool Route = false;
+        int index = 0;
         public Transform[] Waypoints;
         public SyncedAnimator animator;
         public SyncedTransform SyncedTransform;
@@ -18,11 +20,24 @@ namespace BlueNet.Demos {
             {
                 if (agent.hasPath == false || agent.remainingDistance < 2)
                 {
-                    agent.SetDestination(Waypoints[Random.Range(0, Waypoints.Length)].position);
+                    if (Route)
+                    {
+                        agent.SetDestination(Waypoints[index].position);
+                        index++;
+                        if (index == Waypoints.Length)
+                        {
+                            index = 0;
+                        }
+                    }
+                    else
+                    {
+                        agent.SetDestination(Waypoints[Random.Range(0, Waypoints.Length)].position);
+                    }
+                    
 
                 }
-                animator.SetFloat("y", agent.velocity.z);
-                animator.SetFloat("x", agent.velocity.x);
+                animator.SetFloat("y", 1);
+                animator.SetFloat("x",0);
                 SyncedTransform.velocity = agent.velocity;
             }
         }

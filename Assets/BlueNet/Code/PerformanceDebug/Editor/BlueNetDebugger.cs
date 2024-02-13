@@ -6,8 +6,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System;
+using BlueNet.Compression;
+using static BlueNet.Compression.CompressionBase;
 
-namespace BlueNet {
+namespace BlueNet.Test {
     public class BlueNetDebugger : EditorWindow
     {
         [MenuItem("Window/Analysis/BlueNet_traficDebugger")]
@@ -47,6 +49,8 @@ namespace BlueNet {
         bool isLogging = false;
         int MaxlogTimeInSeconds=60*5;
         int TimeElapsed = 0;
+
+        string ObjectsToSpawn = "5";
         void StartLogging()
         {
             PerformanceDebugger.ResetStatistics();
@@ -55,6 +59,7 @@ namespace BlueNet {
             lowestFPS = 1000;
             isLogging = true;
             TimeElapsed = 0;
+
             LoggingThread = new Thread(() => {
                 StreamWriter writer=File.CreateText(WorkingDirectory + SelectedTest + "/" + logName + ".txt");
                 UnityEngine.Debug.Log(WorkingDirectory + SelectedTest + "/" + logName + ".txt");
@@ -75,7 +80,7 @@ namespace BlueNet {
                     }
                 }
                 writer.Close();
-
+                
 
             });
             LoggingThread.Start();
@@ -95,12 +100,49 @@ namespace BlueNet {
         }
 
         int highestFPS=0,lowestFPS=1000,currentFPS=0;
+
+        const string testmessage = "ObjectRPC,0,RpcUpdateAnimations,y,1,3.046199,x,1,-1.723765|ObjectRPC,8,RpcPosition,-57.29464*2.083334*48.1177,-0.02738156*0*5|ObjectRPC,1,RpcRotation,0*315.4963*0|ObjectRPC,1,RpcPosition,52.46152*1.583334*47.32878,-2.453515*0*2.496179|ObjectRPC,1,RpcUpdateAnimations,y,1,2.496179,x,1,-2.453515|ObjectRPC,2,RpcRotation,0*290.8495*0|ObjectRPC,2,RpcPosition,9.785172*1.53819*6.473329,-3.270823*0.030854*1.245702|ObjectRPC,2,RpcUpdateAnimations,y,1,1.245702,x,1,-3.270823|ObjectRPC,10,RpcRotation,0*165.7003*0|ObjectRPC,10,RpcPosition,54.5265*1.58*-27.72256,1.539735*0*-1.276108|ObjectRPC,10,RpcUpdateAnimations,y,1,0.8084801,x,1,-0.5885234|ObjectRPC,0,RpcRotation,0*330.4977*0|ObjectRPC,0,RpcPosition,-41.96736*1.565148*-12.43289,-1.723765*0.01102426*3.046199|";
+        string result = "";
+        string testmessagechoice = "";
+        bool swap = true;
+        CompressionAlgorithmType compressionAlgorithm= CompressionAlgorithmType.none;
+
+        CompressionBase[] compressionTests = new CompressionBase[] { new StringCompressor(), new DeflateCompressor(), new GzipCompressor() };
         private void OnGUI()
         {
             if(GUILayout.Button("test comp"))
             {
-                var comp = new BlueNet.Compression.StringCompressor();
-                comp.Test();
+
+                swap = !swap;
+                if (swap)
+                {
+                    testmessagechoice = testmessage + testmessage;
+                }
+                else
+                {
+                    testmessagechoice = testmessage;
+                }
+                List<CompressionAlgorithmSpeedTest> tests = new List<CompressionAlgorithmSpeedTest>();
+                foreach (CompressionBase comp in compressionTests)
+                {
+                    CompressionAlgorithmSpeedTest test =comp.Test(testmessagechoice);
+                    tests.Add(test);
+                }
+                tests.Sort((a,b)=> {
+                    return (int)MathF.Round(((float)a.TotalTime()*1000) - ((float)b.TotalTime() * 1000));
+                });
+                int i = 0;
+                result = "";
+                foreach (var item in tests)
+                {
+                    i++;
+                    result += "(" + i + ") " + item.name +" comp: "+item.compTime+"ms  deComp: "+item.decompTime+"ms TotalTime: "+item.TotalTime()+"ms\n   Size Reduction: "+item.sizeReduction+ "\n";
+                }
+
+            }
+            if (string.IsNullOrEmpty(result) == false)
+            {
+                GUILayout.Label(result, EditorStyles.boldLabel);
             }
 
             GUILayout.Label("Create New Test", EditorStyles.boldLabel);
@@ -173,12 +215,38 @@ namespace BlueNet {
             //show options for editing test
             if (BlueNetManager.Instance != null)
             {
+                
+                compressionAlgorithm = (CompressionAlgorithmType)EditorGUILayout.EnumPopup("Compression to set:", compressionAlgorithm);
+                if (GUILayout.Button("Set Compression Algorithm")){
+                    var cmd = new DataTypes.NetworkCommand("compressionSwitch", compressionAlgorithm.ToString());
+                    BlueNetManager.SendRPC(cmd);
+                }
+                if (TestManager.instance)
+                {
+                    GUILayout.BeginHorizontal();
+                    ObjectsToSpawn = GUILayout.TextField(ObjectsToSpawn);
+                    if (GUILayout.Button("Activate bots"))
+                    {
+                        TestManager.instance.RpcStart(new string[] { ObjectsToSpawn});
+                    }
+                    GUILayout.EndHorizontal();
+                    if (GUILayout.Button("De-Activate bots"))
+                    {
+                        TestManager.instance.RpcStop(null);
+                    }
+                }
+               
+
                 if (isLogging == false)
                 {
                     logName = BlueNetManager.Instance.ActiveCompressionAlgorithm.ToString();
                     if (GUILayout.Button("Start Logging with comp mode: " + logName))
                     {
                         StartLogging();
+                        if (TestManager.instance)
+                        {
+                            TestManager.instance.RpcStart(new string[] { ObjectsToSpawn });
+                        }
                     }
                 }
                 else

@@ -25,6 +25,8 @@ namespace BlueNet.Compression
         public override string DeCompress(byte[] value)
         {
             string Output;
+#if ANDROID
+            //gizip dosnt work or andorid--
             try
             {
                 
@@ -48,6 +50,20 @@ namespace BlueNet.Compression
                 Debug.Log(value);
                 Output= "error|";
             }
+#else
+            using (var memoryStream = new MemoryStream(value))
+            {
+                using (var decompressStream = new GZipStream(memoryStream, CompressionMode.Decompress))
+                {
+                    using (var outputStream = new MemoryStream())
+                    {
+                        decompressStream.CopyTo(outputStream);
+                        Output = Encoding.UTF8.GetString(outputStream.ToArray());
+                    }
+
+                }
+            }
+#endif
             return Output;
         }
     }
