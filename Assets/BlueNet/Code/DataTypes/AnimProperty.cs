@@ -8,7 +8,8 @@ namespace BlueNet.DataTypes
     {
         boolean = 0,
         floating = 1,
-        interger = 2
+        interger = 2,
+
     }
 
 

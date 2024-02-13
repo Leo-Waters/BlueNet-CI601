@@ -31,26 +31,31 @@ namespace BlueNet
                 syncDelay+=Time.fixedDeltaTime;
                 if (syncDelay >= VaribleSyncPeriod)
                 {
-                    List<string> Params = new List<string>();
-                    foreach (var AnimProperty in UpdateBuffer)
-                    {
-                        if (AnimProperty.Value.ChangedCheck())
-                        {
-                            Params.Add(AnimProperty.Key);//property name
-                            Params.Add(((byte)AnimProperty.Value.get_type).ToString());//property type
-                            Params.Add(AnimProperty.Value.get_value);//property value
-                        }
-                    }
-
-
-                    if (Params.Count != 0)
-                    {
-                        netObject.SendRPC("RpcUpdateAnimations", false, Params.ToArray());
-                    }
-                    
-                    syncDelay = 0;
+                    ForceUpdate();
                 }
             } 
+        }
+        //force the animation changes to be sent
+        public void ForceUpdate()
+        {
+            List<string> Params = new List<string>();
+            foreach (var AnimProperty in UpdateBuffer)
+            {
+                if (AnimProperty.Value.ChangedCheck())
+                {
+                    Params.Add(AnimProperty.Key);//property name
+                    Params.Add(((byte)AnimProperty.Value.get_type).ToString());//property type
+                    Params.Add(AnimProperty.Value.get_value);//property value
+                }
+            }
+
+
+            if (Params.Count != 0)
+            {
+                netObject.SendRPC("RpcUpdateAnimations", false, Params.ToArray());
+            }
+
+            syncDelay = 0;
         }
         //recive animation updates from objects owning player
         public void RpcUpdateAnimations(string[] args)
@@ -69,6 +74,7 @@ namespace BlueNet
                     case AnimPropertyType.floating:
                         animator.SetFloat(args[i], float.Parse(args[i + 2]));
                         break;
+
                     default:
                         Debug.LogWarning("tried to sync non defined anim type");
                         break;
@@ -81,6 +87,16 @@ namespace BlueNet
         {
             netObject = GetComponent<BlueNetObject>();
             
+        }
+
+        public void RpcSetTrigger(string[] args)
+        {
+            animator.SetTrigger(args[0]);
+        }
+        public void SetTrigger(string name)
+        {
+            animator.SetTrigger(name);
+            netObject.SendRPC("RpcSetTrigger", false,name);
         }
 
         //sets a bool on the animator on all players
