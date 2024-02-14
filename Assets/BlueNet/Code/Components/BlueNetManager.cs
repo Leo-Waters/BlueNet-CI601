@@ -256,9 +256,6 @@ namespace BlueNet
                         p_ping = Time.time - pingSendTime;
                         break;
 
-                    case "compressionSwitch":
-                        SetCompressionAlgoithm((CompressionAlgorithmType)Enum.Parse(typeof(CompressionAlgorithmType),command.GetString(0)));
-                        break;
                     default:
                         Debug.Log("Recived Command with no Proccess:" + command.GetCommand());
                         break;

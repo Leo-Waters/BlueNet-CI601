@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Unity.EditorCoroutines.Editor;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -50,8 +51,7 @@ namespace BlueNet.Test {
         int MaxlogTimeInSeconds=60*5;
         int TimeElapsed = 0;
 
-        string ObjectsToSpawn = "5";
-        void StartLogging()
+        IEnumerator StartLogging()
         {
             PerformanceDebugger.ResetStatistics();
             Application.targetFrameRate = 60;
@@ -60,36 +60,81 @@ namespace BlueNet.Test {
             isLogging = true;
             TimeElapsed = 0;
 
-            LoggingThread = new Thread(() => {
-                StreamWriter writer=File.CreateText(WorkingDirectory + SelectedTest + "/" + logName + ".txt");
-                UnityEngine.Debug.Log(WorkingDirectory + SelectedTest + "/" + logName + ".txt");
-               
-                while (isLogging)
+            int num = 10;
+            if(SelectedTest.Substring(3) == "bots"){
+                num = int.Parse(SelectedTest.Substring(0,SelectedTest.IndexOf("_")));
+            }
+            while (true)
+            {
+                LoggingThread = new Thread(() =>
                 {
-                    Thread.Sleep(1000);
+                    StreamWriter writer = File.CreateText(WorkingDirectory + SelectedTest + "/" + logName + ".txt");
+                    UnityEngine.Debug.Log(WorkingDirectory + SelectedTest + "/" + logName + ".txt");
 
-                    int sentBytes = PerformanceDebugger.TotalBytesSentSinceLastCheck();
-                    int recivedBytes = PerformanceDebugger.TotalBytesReadSinceLastCheck();
-                    int objectUpdates = PerformanceDebugger.TotalObjectUpdatesSinceLastCheck();
-
-                    TimeElapsed++;
-                    writer.WriteLine(string.Format("{0} {1} {2} {3} {4}", sentBytes, recivedBytes, objectUpdates, currentFPS, (int)MathF.Round(BlueNetManager.Instance.ping * 1000) ));
-                    if (TimeElapsed == MaxlogTimeInSeconds)
+                    while (isLogging)
                     {
-                        isLogging = false;
+                        Thread.Sleep(1000);
+
+                        int sentBytes = PerformanceDebugger.TotalBytesSentSinceLastCheck();
+                        int recivedBytes = PerformanceDebugger.TotalBytesReadSinceLastCheck();
+                        int objectUpdates = PerformanceDebugger.TotalObjectUpdatesSinceLastCheck();
+
+                        TimeElapsed++;
+                        writer.WriteLine(string.Format("{0} {1} {2} {3} {4}", sentBytes, recivedBytes, objectUpdates, currentFPS, (int)MathF.Round(BlueNetManager.Instance.ping * 1000)));
+                        if (TimeElapsed == MaxlogTimeInSeconds)
+                        {
+                            isLogging = false;
+                        }
+                    }
+                    writer.Close();
+
+
+
+                });
+
+                LoggingThread.Start();
+                if (TestManager.instance)
+                {
+                    TestManager.instance.RpcStart(new string[] { num.ToString() });
+                }
+                yield return new WaitUntil(() => LoggingThread.IsAlive == false);
+
+                if (SelectedTest.Contains("bots"))
+                {
+                    num += 10;
+                    if (num == 60)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        SelectedTest = num.ToString() + SelectedTest.Substring(2);
+                        isLogging = true;
+                        TimeElapsed = 0;
                     }
                 }
-                writer.Close();
-                
+                else
+                {
+                    break;
+                }
+            }
 
-            });
-            LoggingThread.Start();
+            if (TestManager.instance)
+            {
+                TestManager.instance.RpcStop(null);
+            }
+
         }
         Thread LoggingThread;
-
+        EditorCoroutine LoggerRoutine;
         void StopLogging()
         {
             isLogging = false;
+            if (LoggerRoutine != null)
+            {
+                EditorCoroutineUtility.StopCoroutine(LoggerRoutine);
+            }
+            
         }
         private void OnInspectorUpdate()
         {
@@ -105,7 +150,6 @@ namespace BlueNet.Test {
         string result = "";
         string testmessagechoice = "";
         bool swap = true;
-        CompressionAlgorithmType compressionAlgorithm= CompressionAlgorithmType.none;
 
         CompressionBase[] compressionTests = new CompressionBase[] { new StringCompressor(), new DeflateCompressor(), new GzipCompressor() };
         private void OnGUI()
@@ -216,37 +260,14 @@ namespace BlueNet.Test {
             if (BlueNetManager.Instance != null)
             {
                 
-                compressionAlgorithm = (CompressionAlgorithmType)EditorGUILayout.EnumPopup("Compression to set:", compressionAlgorithm);
-                if (GUILayout.Button("Set Compression Algorithm")){
-                    var cmd = new DataTypes.NetworkCommand("compressionSwitch", compressionAlgorithm.ToString());
-                    BlueNetManager.SendRPC(cmd);
-                }
-                if (TestManager.instance)
-                {
-                    GUILayout.BeginHorizontal();
-                    ObjectsToSpawn = GUILayout.TextField(ObjectsToSpawn);
-                    if (GUILayout.Button("Activate bots"))
-                    {
-                        TestManager.instance.RpcStart(new string[] { ObjectsToSpawn});
-                    }
-                    GUILayout.EndHorizontal();
-                    if (GUILayout.Button("De-Activate bots"))
-                    {
-                        TestManager.instance.RpcStop(null);
-                    }
-                }
-               
-
                 if (isLogging == false)
                 {
                     logName = BlueNetManager.Instance.ActiveCompressionAlgorithm.ToString();
                     if (GUILayout.Button("Start Logging with comp mode: " + logName))
                     {
-                        StartLogging();
-                        if (TestManager.instance)
-                        {
-                            TestManager.instance.RpcStart(new string[] { ObjectsToSpawn });
-                        }
+                        
+                        LoggerRoutine=EditorCoroutineUtility.StartCoroutine(StartLogging(), this);
+
                     }
                 }
                 else

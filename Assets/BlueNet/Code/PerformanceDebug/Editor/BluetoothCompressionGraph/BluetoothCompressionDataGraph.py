@@ -155,13 +155,55 @@ plt.subplots_adjust(left=0.1,
 
 
 
-#print averages
+#print read averages
+print("------Read-------")
 for data in TestDataSets:
   totalread=0
   for r in data.read:
     totalread=totalread+r
 
   average=totalread/len(data.read)
+  print(data.name+" Average Bytes Read Per Second: "+str(average))
+  
+#print write averages
+print("------write-------")
+for data in TestDataSets:
+  totalwrite=0
+  for r in data.sent:
+    totalwrite=totalwrite+r
+
+  average=totalwrite/len(data.sent)
   print(data.name+" Average Bytes Sent Per Second: "+str(average))
+  
+#print latency averages
+print("------Latency-------")
+for data in TestDataSets:
+  totalLatency=0
+  for r in data.latency:
+    totalLatency=totalLatency+r
+
+  average=totalLatency/len(data.latency)
+  print(data.name+" Average Latency Per Second: "+str(average))
+
+#print fps averages
+print("------fps-------")
+for data in TestDataSets:
+  totalFps=0
+  for r in data.fps:
+    totalFps=totalFps+r
+
+  average=totalFps/len(data.fps)
+  print(data.name+" Average FPS Per Second: "+str(average))
+
+#print object averages
+print("------objUpdates-------")
+for data in TestDataSets:
+  totalObjUpdates=0
+  for r in data.objUpdates:
+    totalObjUpdates=totalObjUpdates+r
+
+  average=totalObjUpdates/len(data.objUpdates)
+  print(data.name+" Average Object updates Per Second: "+str(average))
+
 
 plt.show()
