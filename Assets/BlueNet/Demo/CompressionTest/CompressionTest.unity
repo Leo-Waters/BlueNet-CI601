@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (40)
@@ -244,6 +248,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (3)
@@ -357,6 +365,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (12)
@@ -470,6 +482,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (45)
@@ -583,6 +599,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (48)
@@ -696,6 +716,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (35)
@@ -809,6 +833,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (21)
@@ -922,6 +950,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (36)
@@ -1035,6 +1067,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (11)
@@ -1148,6 +1184,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (2)
@@ -1292,6 +1332,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (23)
@@ -1405,6 +1449,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (44)
@@ -1518,6 +1566,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (37)
@@ -1631,6 +1683,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (27)
@@ -1841,6 +1897,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (29)
@@ -2016,6 +2076,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (28)
@@ -2129,6 +2193,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (15)
@@ -2436,6 +2504,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (43)
@@ -2549,6 +2621,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (42)
@@ -2662,6 +2738,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (38)
@@ -2806,6 +2886,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (20)
@@ -2919,6 +3003,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (26)
@@ -3032,6 +3120,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (14)
@@ -3145,6 +3237,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (18)
@@ -3258,6 +3354,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (5)
@@ -3371,6 +3471,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (19)
@@ -3484,6 +3588,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (7)
@@ -3694,6 +3802,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (13)
@@ -3807,6 +3919,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (47)
@@ -4187,6 +4303,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (24)
@@ -4331,6 +4451,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (46)
@@ -4444,6 +4568,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (1)
@@ -4557,6 +4685,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (4)
@@ -4754,6 +4886,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (8)
@@ -4867,6 +5003,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (50)
@@ -4980,6 +5120,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (22)
@@ -5124,6 +5268,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (39)
@@ -5237,6 +5385,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (16)
@@ -5350,6 +5502,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (17)
@@ -5463,6 +5619,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (33)
@@ -5576,6 +5736,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (9)
@@ -5689,6 +5853,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (41)
@@ -5802,6 +5970,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (31)
@@ -5915,6 +6087,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (10)
@@ -6028,6 +6204,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (34)
@@ -6141,6 +6321,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (49)
@@ -6254,6 +6438,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (32)
@@ -6367,6 +6555,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (30)
@@ -6480,6 +6672,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (6)
@@ -6593,6 +6789,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1415542227}
     m_Modifications:
+    - target: {fileID: -6070990984305652218, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
+      propertyPath: UpdateRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 854014357686348761, guid: 7c195e34368723e4792bb770aafbdf57, type: 3}
       propertyPath: m_Name
       value: BeanAI (25)
