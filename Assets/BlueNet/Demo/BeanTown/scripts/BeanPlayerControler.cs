@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlueNet;
-namespace BlueNet.Demo
+namespace BlueNet.Demos
 {
     public class BeanPlayerControler : MonoBehaviour
     {
@@ -47,10 +47,10 @@ namespace BlueNet.Demo
         void Update()
         {
             //is the player holding shift, then they are running
-            Running = Input.GetKey(KeyCode.LeftShift);
+            Running = TownCharacterControls.Instance.Running;
 
             //rotate
-            Vector2 rot = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * LookSpeed;
+            Vector2 rot = TownCharacterControls.Instance.LookDir * LookSpeed;
 
             //RotY
             LookUpRot = Mathf.Clamp((LookUpRot - rot.y), UpDownClamp.x, UpDownClamp.y);
@@ -61,7 +61,7 @@ namespace BlueNet.Demo
             transform.Rotate(0, rot.x, 0);
 
             //get input direction
-            Vector2 Dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            Vector2 Dir = TownCharacterControls.Instance.moveDir;
             Dir.Normalize();//ensure fixed speed in every direction
 
             animator.SetFloat("y", Running ? Dir.y : (Dir.y*2) );

@@ -204,6 +204,12 @@ namespace BlueNet
                 case CompressionAlgorithmType.customString:
                     Compression = new StringCompressor();
                     break;
+                case CompressionAlgorithmType.ParallelDefalte:
+                    Compression = new ParallelDeflateCompressor();
+                    break;
+                case CompressionAlgorithmType.ParallelGzip:
+                    Compression = new ParallelGzipCompressor();
+                    break;
                 case CompressionAlgorithmType.none:
                 default:
                     Compression = new CompressionBase();

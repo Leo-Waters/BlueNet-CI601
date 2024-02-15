@@ -14,7 +14,7 @@ namespace BlueNet.Compression
             byte[] bytes = Encoding.UTF8.GetBytes(value);
             using (var memoryStream = new MemoryStream())
             {
-                using (var gzipStream = new GZipStream(memoryStream, System.IO.Compression.CompressionLevel.Fastest))
+                using (var gzipStream = new GZipStream(memoryStream, System.IO.Compression.CompressionLevel.Fastest,true))
                 {
                     gzipStream.Write(bytes);
                 }
@@ -25,7 +25,7 @@ namespace BlueNet.Compression
         public override string DeCompress(byte[] value)
         {
             string Output;
-#if ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
             //gizip dosnt work or andorid--
             try
             {

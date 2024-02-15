@@ -151,7 +151,7 @@ namespace BlueNet.Test {
         string testmessagechoice = "";
         bool swap = true;
 
-        CompressionBase[] compressionTests = new CompressionBase[] { new StringCompressor(), new DeflateCompressor(), new GzipCompressor() };
+        CompressionBase[] compressionTests = new CompressionBase[] { new StringCompressor(), new DeflateCompressor(), new GzipCompressor(), new ParallelDeflateCompressor(), new ParallelGzipCompressor() };
         private void OnGUI()
         {
             if(GUILayout.Button("test comp"))
@@ -160,7 +160,7 @@ namespace BlueNet.Test {
                 swap = !swap;
                 if (swap)
                 {
-                    testmessagechoice = testmessage + testmessage;
+                    testmessagechoice = testmessage + testmessage + testmessage + testmessage + testmessage + testmessage + testmessage + testmessage;
                 }
                 else
                 {

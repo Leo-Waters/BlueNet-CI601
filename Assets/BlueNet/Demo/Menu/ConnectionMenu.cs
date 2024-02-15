@@ -10,7 +10,6 @@ namespace BlueNet.Default
     {
         public GameObject ListPrefab;
         public Transform Content;
-        public GameObject SearchingDisplay;
         Dictionary<GameObject, KeyValuePair<string,string>> DeviceList = new Dictionary<GameObject, KeyValuePair<string, string>>();
         GameObject Selected;
 
@@ -20,7 +19,6 @@ namespace BlueNet.Default
         {
 
             ListPrefab.SetActive(false);
-            SearchingDisplay.SetActive(false);
             Refresh();
         }
 
@@ -59,8 +57,6 @@ namespace BlueNet.Default
                 Destroy(item.Key);
             }
             DeviceList.Clear();
-
-            SearchingDisplay.SetActive(true);
 
             foreach (var device in BlueNetManager.GetDevices())
             {
