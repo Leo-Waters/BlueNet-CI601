@@ -8,7 +8,7 @@ using System.Threading;
 using UnityEngine;
 namespace BlueNet.Compression
 {
-    public class ParellelCompressionBase : CompressionBase
+    public class ParallelCompressionBase : CompressionBase
     {
         const int ThreadCount = 4;
         public override byte[] Compress(string value)
@@ -24,8 +24,7 @@ namespace BlueNet.Compression
             // 2D array, 1 byte array for each thread
             byte[][] compressedDataChunks = new byte[ThreadCount][];
             ManualResetEvent[] threadDoneEvents = new ManualResetEvent[ThreadCount];
-            //total length of data
-            int CompressedDataLength = 0;
+
 
             // Create Parellel Compression threads -----------------------------------
             for (int i = 0; i < ThreadCount; i++)
@@ -36,15 +35,14 @@ namespace BlueNet.Compression
 
                 threadDoneEvents[i] = new ManualResetEvent(false);
 
+                int threadID = i;
+
                 // Create a thread for each chunk
-                ThreadPool.QueueUserWorkItem(ID =>
+                ThreadPool.QueueUserWorkItem(state =>
                 {
-                    int threadID = (int)ID;
                     //compress and store result
-                    compressedDataChunks[(int)threadID] = CompressChunk(bytesValue, startIndex, count);
-                    
-                    //append chunk length + extra 2 bytes for length
-                    CompressedDataLength += compressedDataChunks[(int)threadID].Length + 2;
+                    compressedDataChunks[threadID] = CompressChunk(bytesValue, startIndex, count);
+                   
                     //set done
                     threadDoneEvents[threadID].Set();
                 },i);
@@ -53,6 +51,15 @@ namespace BlueNet.Compression
             WaitHandle.WaitAll(threadDoneEvents);
 
 
+            //total length of data
+            int CompressedDataLength = 0;
+            for (int i = 0; i < ThreadCount; i++)
+            {
+                //append chunk length + extra 2 bytes for length
+                CompressedDataLength += compressedDataChunks[i].Length+2;
+
+            }
+
             // join each data chunk together------------------------------------
             byte[] compressedData = new byte[CompressedDataLength];
             int offset = 0;
@@ -60,7 +67,8 @@ namespace BlueNet.Compression
             for (int i = 0; i < ThreadCount; i++)
             {
                 //insert chunk size at front of chunk in final array, for the decompresion sides knowledge
-                BitConverter.GetBytes((ushort)compressedDataChunks[i].Length-2).CopyTo(compressedData,offset);
+
+                BitConverter.GetBytes((ushort)compressedDataChunks[i].Length).CopyTo(compressedData,offset);
                 offset+=2;
                 //copy chunk to final array
                 Array.Copy(compressedDataChunks[i], 0, compressedData, offset, compressedDataChunks[i].Length);
@@ -89,9 +97,6 @@ namespace BlueNet.Compression
             // 2D array, 1 byte array for each thread
             byte[][] DecompressedDataChunks = new byte[ThreadCount][];
 
-            //total decomp size
-            int DeCompressedDataLength = 0;
-
             //offset for chunkdata
             int offset = 0;
             // Create Parellel DeCompression threads -----------------------------------
@@ -114,17 +119,25 @@ namespace BlueNet.Compression
                 ThreadPool.QueueUserWorkItem(state =>
                 {
                     DecompressedDataChunks[threadIndex] = DeCompressChunk(value, threadOffset, threadCount);
-                    DeCompressedDataLength += DecompressedDataChunks[threadIndex].Length;
                     threadDoneEvents[threadIndex].Set();
                 });
 
                 //move offset to next chunk
-                offset += count + 2;
+                offset += count;
             }
 
 
             //block main thread and wait for each thread to be done --------------------
             WaitHandle.WaitAll(threadDoneEvents);
+
+            //total length of data
+            int DeCompressedDataLength = 0;
+            for (int i = 0; i < ThreadCount; i++)
+            {
+                //append chunk length + extra 2 bytes for length
+                DeCompressedDataLength += DecompressedDataChunks[i].Length + 2;
+
+            }
 
 
             // join each data chunk together------------------------------------
@@ -134,11 +147,8 @@ namespace BlueNet.Compression
             {
                 //copy chunk to final array
                 Array.Copy(DecompressedDataChunks[i], 0, DecompressedData, offset, DecompressedDataChunks[i].Length);
-
                 offset += DecompressedDataChunks[i].Length;
             }
-
-
 
             return Encoding.UTF8.GetString(DecompressedData);
         }

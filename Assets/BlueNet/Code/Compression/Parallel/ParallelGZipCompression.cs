@@ -8,7 +8,7 @@ using System.Threading;
 using UnityEngine;
 namespace BlueNet.Compression
 {
-    public class ParallelGzipCompressor : ParellelCompressionBase
+    public class ParallelGzipCompressor : ParallelCompressionBase
     {
         //compress a chunk of data
         public override byte[] CompressChunk(byte[] data, int start, int count)

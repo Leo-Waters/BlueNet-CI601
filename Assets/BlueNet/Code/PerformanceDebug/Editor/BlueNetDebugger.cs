@@ -151,7 +151,7 @@ namespace BlueNet.Test {
         string testmessagechoice = "";
         bool swap = true;
 
-        CompressionBase[] compressionTests = new CompressionBase[] { new StringCompressor(), new DeflateCompressor(), new GzipCompressor(), new ParallelDeflateCompressor(), new ParallelGzipCompressor() };
+        CompressionBase[] compressionTests = new CompressionBase[] { new StringCompressor(), new DeflateCompressor(), new GzipCompressor(), new ParallelDeflateCompressor(), new ParallelGzipCompressor(),new ParallelCompressionBase()};
         private void OnGUI()
         {
             if(GUILayout.Button("test comp"))
@@ -166,6 +166,7 @@ namespace BlueNet.Test {
                 {
                     testmessagechoice = testmessage;
                 }
+                
                 List<CompressionAlgorithmSpeedTest> tests = new List<CompressionAlgorithmSpeedTest>();
                 foreach (CompressionBase comp in compressionTests)
                 {

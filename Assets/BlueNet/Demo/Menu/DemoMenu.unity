@@ -8104,7 +8104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 627250570389539423, guid: f340667f7160f9f4495d74b31f08a04c, type: 3}
       propertyPath: ActiveCompressionAlgorithm
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

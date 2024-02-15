@@ -48,19 +48,20 @@ namespace BlueNet.Compression
             Stopwatch sw = Stopwatch.StartNew();
             var data = Compress(message);
             sw.Stop();
-            UnityEngine.Debug.Log(Encoding.UTF8.GetString(data));
+            //UnityEngine.Debug.Log(Encoding.UTF8.GetString(data));
             double compSec = sw.Elapsed.TotalSeconds;
 
 
             sw = Stopwatch.StartNew();
             var rtn = DeCompress(data);
-            UnityEngine.Debug.Log(rtn);
+            
             sw.Stop();
 
             sizeReduction -= data.Length;
             double DecompSec = sw.Elapsed.TotalSeconds;
 
             string name = this.GetType().ToString();
+            UnityEngine.Debug.Log(name + ": " + rtn);
 
             return new CompressionAlgorithmSpeedTest(name.Substring(name.LastIndexOf('.')), compSec*1000, DecompSec*1000, sizeReduction);
         }

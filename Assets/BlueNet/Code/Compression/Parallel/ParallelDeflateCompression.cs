@@ -8,11 +8,12 @@ using System.Threading;
 using UnityEngine;
 namespace BlueNet.Compression
 {
-    public class ParallelDeflateCompressor : ParellelCompressionBase
+    public class ParallelDeflateCompressor : ParallelCompressionBase
     {
         //compress a chunk of data
         public override byte[] CompressChunk(byte[] data, int start, int count)
         {
+
             //memory stream to write compression stream into
             using (var memoryStream = new MemoryStream())
             {
@@ -32,6 +33,7 @@ namespace BlueNet.Compression
         //De compress a chunk of data
         public override byte[] DeCompressChunk(byte[] data, int start, int count)
         {
+
             //memory stream to write compression stream into
             using (var outputStream = new MemoryStream())
             {
