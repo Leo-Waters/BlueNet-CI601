@@ -14,6 +14,7 @@ namespace BlueNet.Compression
         public override byte[] CompressChunk(byte[] data, int start, int count)
         {
 
+           
             //memory stream to write compression stream into
             using (var memoryStream = new MemoryStream())
             {

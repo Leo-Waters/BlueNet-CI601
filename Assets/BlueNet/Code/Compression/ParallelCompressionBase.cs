@@ -134,8 +134,8 @@ namespace BlueNet.Compression
             int DeCompressedDataLength = 0;
             for (int i = 0; i < ThreadCount; i++)
             {
-                //append chunk length + extra 2 bytes for length
-                DeCompressedDataLength += DecompressedDataChunks[i].Length + 2;
+                //append chunk length
+                DeCompressedDataLength += DecompressedDataChunks[i].Length;
 
             }
 
@@ -150,6 +150,7 @@ namespace BlueNet.Compression
                 offset += DecompressedDataChunks[i].Length;
             }
 
+           
             return Encoding.UTF8.GetString(DecompressedData);
         }
 
