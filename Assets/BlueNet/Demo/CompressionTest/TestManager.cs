@@ -13,6 +13,19 @@ namespace BlueNet.Test {
         public GameObject[] AI;
         public BlueNetObject net;
         int active;
+
+        //sort ai array so for equal ownership of active bots
+        private void OnValidate()
+        {
+            bool ownership = false;
+            foreach (var bot in AI)
+            {
+                bot.GetComponent<BlueNetObject>().HostIsOwner = ownership;
+                ownership = !ownership;
+            }
+
+
+        }
         public void RpcStart(string[] args)
         {
             active = int.Parse(args[0]);
