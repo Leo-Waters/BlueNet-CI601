@@ -10,10 +10,14 @@ namespace BlueNet.Compression
 {
     public class ParallelCompressionBase : CompressionBase
     {
-        const int ThreadCount = 4;
+        //incoming data / threashold = amount of chunks/threads
+        const int ChunkSizeThreashold = 1500;
         public override byte[] Compress(string value)
         {
             byte[] bytesValue = Encoding.UTF8.GetBytes(value);
+
+
+            byte ThreadCount = (byte)(bytesValue.Length / ChunkSizeThreashold);
 
             // Divide the byte array between theads
             int sizeOfDataChunks = bytesValue.Length / ThreadCount;
@@ -61,8 +65,10 @@ namespace BlueNet.Compression
             }
 
             // join each data chunk together------------------------------------
-            byte[] compressedData = new byte[CompressedDataLength];
-            int offset = 0;
+            byte[] compressedData = new byte[1+CompressedDataLength];
+            //thread count is required to know how many chunks must be decompressed
+            compressedData[0] = ThreadCount;
+            int offset = 1;
 
             for (int i = 0; i < ThreadCount; i++)
             {
@@ -94,11 +100,13 @@ namespace BlueNet.Compression
 
         public override string DeCompress(byte[] value)
         {
+            byte ThreadCount = value[0];
+
             // 2D array, 1 byte array for each thread
             byte[][] DecompressedDataChunks = new byte[ThreadCount][];
 
             //offset for chunkdata
-            int offset = 0;
+            int offset = 1;
             // Create Parellel DeCompression threads -----------------------------------
             ManualResetEvent[] threadDoneEvents = new ManualResetEvent[ThreadCount];
 

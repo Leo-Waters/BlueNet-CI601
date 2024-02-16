@@ -61,7 +61,7 @@ namespace BlueNet.Test {
             TimeElapsed = 0;
 
             int num = 10;
-            if(SelectedTest.Substring(3) == "bots"){
+            if(SelectedTest.Contains("bots")){
                 num = int.Parse(SelectedTest.Substring(0,SelectedTest.IndexOf("_")));
             }
             while (true)
