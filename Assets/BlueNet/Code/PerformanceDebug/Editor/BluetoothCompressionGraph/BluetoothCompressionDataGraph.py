@@ -6,7 +6,7 @@ import os
 
 #Data Set object representing the data of a compression test
 class DataSet:
-  def __init__(self,name,seconds,read, sent,objUpdates,fps,latency,totalSent,totalRecived):
+  def __init__(self,name,seconds,read, sent,objUpdates,fps,latency,averageSent,averageRecived,averageLatency,averageFps):
     self.name=name
     self.seconds = seconds
     self.read = read
@@ -14,8 +14,10 @@ class DataSet:
     self.objUpdates = objUpdates
     self.fps = fps
     self.latency=latency
-    self.totalRecived=totalRecived
-    self.totalSent=totalSent
+    self.averageRecived=averageRecived
+    self.averageSent=averageSent
+    self.averageLatency=averageLatency
+    self.averageFps=averageFps
 
 #load a data set from a file path
 def LoadDataFromFile(path):
@@ -29,25 +31,40 @@ def LoadDataFromFile(path):
 
     totalSent=0
     totalRecived=0
+    totalFps=0
+    totalLatency=0
     
     f = open(path,'r') 
     for row in f:
         second+=1
         seconds.append(second)
         row = row.split(' ')
+        
         readI=int(row[0])
         sentI=int(row[1])
         totalSent=totalSent+sentI
         totalRecived=totalRecived+readI
         read.append(readI) 
         sent.append(sentI)
-        objUpdates.append(int(row[2])) 
-        fps.append(int(row[3]))
-        latency.append(float(row[4]))
+        
+        objUpdates.append(int(row[2]))
 
+        fpsI=int(row[3])
+        fps.append(fpsI)
+        totalFps=totalFps+fpsI
+                 
+        latI=int(row[4])
+        latency.append(latI)
+        totalLatency=totalLatency+latI
+
+    time=len(sent)
+    averageSent=totalSent/time
+    averageRecived=totalRecived/time
+    averageLatency=totalLatency/time
+    averageFps=totalFps/time
     
         
-    data=DataSet(os.path.splitext(os.path.basename(path))[0],seconds,read,sent,objUpdates,fps,latency,totalSent,totalRecived);
+    data=DataSet(os.path.splitext(os.path.basename(path))[0],seconds,read,sent,objUpdates,fps,latency,averageSent,averageRecived,averageLatency,averageFps);
     return data
 
 
@@ -72,14 +89,14 @@ fig = plt.figure()
 
 #create the sub plots for each of the logged data types
 BytesSentGraph = fig.add_subplot(321,label = "Bytes Sent",ylabel='Bytes')
-ComparisonBar = fig.add_subplot(322,label = "Total Sent And Recived",ylabel='Bytes')
+ComparisonBar = fig.add_subplot(322,label = "Average Sent And Recived",ylabel='Bytes')
 
 
 BytesReadGraph = fig.add_subplot(323,sharex = BytesSentGraph, sharey = BytesSentGraph,label = "Bytes Read",ylabel='Bytes')
-LatencyGraph = fig.add_subplot(324,sharex = BytesSentGraph,label = "Latency",ylabel='ms')
+LatencyGraph = fig.add_subplot(324,label = "Latency",ylabel='ms')
 
 UpdatesGraph = fig.add_subplot(325,sharex = BytesSentGraph,label = "Object Updates Recived",ylabel='updates')
-FPSGraph = fig.add_subplot(326,sharex = BytesSentGraph,label = "FPS",ylabel='Frames')
+FPSGraph = fig.add_subplot(326,label = "Average FPS",ylabel='Frames')
 
 
 #plot the bytes sent data
@@ -98,30 +115,35 @@ for data in TestDataSets:
 
 #BytesReadGraph.get_xaxis().set_visible(False)
 
-#plot the total bytes send and recived data for comparison
 
+##get average data for bar charts
 DataSetCount=len(TestDataSets);
-TotalSent= []
-TotalRecived= []
+AverageSent= []
+AverageRecived= []
+AverageLatency= []
+AverageFPS= []
 groupNames=[]
 for data in TestDataSets:
   groupNames.append(data.name)
   print(data.name)
-  TotalSent.append(data.totalSent)
-  TotalRecived.append(data.totalRecived)
+  AverageSent.append(data.averageSent)
+  AverageRecived.append(data.averageRecived)
+  AverageLatency.append(data.averageLatency)
+  AverageFPS.append(data.averageFps)
 
+#plot the average bytes send and recived data for comparison
 indent = np.arange(DataSetCount)
 Barwidth=0.4
 
-ComparisonBar.bar(indent, TotalSent, Barwidth, edgecolor="w", linewidth=3,label="Total Sent",color=['lightblue'])
+ComparisonBar.bar(indent, AverageSent, Barwidth, edgecolor="w", linewidth=3,label="Total Sent",color=['lightblue'])
 
-ComparisonBar.bar(indent+Barwidth, TotalRecived, Barwidth, edgecolor="w",linewidth=3,label="Total Received",color=['purple'])
+ComparisonBar.bar(indent+Barwidth, AverageRecived, Barwidth, edgecolor="w",linewidth=3,label="Total Received",color=['purple'])
 
 
 ComparisonBar.set_xticks(indent)
 ComparisonBar.set_xticklabels(groupNames)
 
-ComparisonBar.set_title('Total Sent & Received')
+ComparisonBar.set_title('Average Sent & Received p/s')
 ComparisonBar.legend(loc='upper center')
 
 #--- plot the object updates
@@ -131,16 +153,27 @@ for data in TestDataSets:
   UpdatesGraph.set_xlabel('Seconds')
 
 
-#--- plot the fps
-FPSGraph.set_title('Frames per second')
-for data in TestDataSets:
-  FPSGraph.plot(data.seconds, data.fps, label = data.name)
-FPSGraph.set_xlabel('Seconds')
+#--- plot the fps 
+indent = np.arange(DataSetCount)/2
+Barwidth=0.4
+
+FPSGraph.bar(indent, AverageFPS, Barwidth, edgecolor="w", linewidth=3,label="FPS")
+
+FPSGraph.set_xticks(indent)
+FPSGraph.set_xticklabels(groupNames)
+
+FPSGraph.set_title('Average FPS')
 
 #--- plot the latency
-LatencyGraph.set_title('Latency')
-for data in TestDataSets:
-  LatencyGraph.plot(data.seconds, data.latency, label = data.name)
+LatencyGraph.set_title('Average Latency')
+indent = np.arange(DataSetCount)/2
+Barwidth=0.4
+
+LatencyGraph.bar(indent, AverageLatency, Barwidth, edgecolor="w", linewidth=3,label="FPS")
+
+LatencyGraph.set_xticks(indent)
+LatencyGraph.set_xticklabels(groupNames)
+
 
 #LatencyGraph.get_xaxis().set_visible(False)
 
