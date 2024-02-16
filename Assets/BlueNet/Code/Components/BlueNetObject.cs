@@ -7,6 +7,7 @@ using System;
 namespace BlueNet
 {
     //Provides an intermediate layer for sending or reciving data and RPCS on a game object
+    [AddComponentMenu("BlueNet/Network Object")]
     public class BlueNetObject : MonoBehaviour
     {
         [Header("NetID must be unique")]

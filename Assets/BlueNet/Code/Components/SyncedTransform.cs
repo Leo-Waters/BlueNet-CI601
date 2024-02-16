@@ -6,6 +6,7 @@ namespace BlueNet{
     // provides client side perdiction while
     // automaticly sending updates of the objects transform
     [RequireComponent(typeof(BlueNetObject))]
+    [AddComponentMenu("BlueNet/Synced Transform")]
     public class SyncedTransform : MonoBehaviour
     {
         BlueNetObject netObject;

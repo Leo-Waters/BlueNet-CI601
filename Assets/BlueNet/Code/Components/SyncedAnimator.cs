@@ -9,6 +9,7 @@ namespace BlueNet
     // essentialy a middle man for the animator component
     // provides set value functions, alowing the animator values to be syncronized
     [RequireComponent(typeof(BlueNetObject))]
+    [AddComponentMenu("BlueNet/Synced Animator")]
     public class SyncedAnimator : MonoBehaviour
     {
         BlueNetObject netObject;

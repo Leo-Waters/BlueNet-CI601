@@ -9,11 +9,28 @@ using BlueNet.DataTypes;
 using UnityEngine.Android;
 using BlueNet.Transports;
 using BlueNet.Compression;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 namespace BlueNet
 {
     //Provides Functionality for Creating and joining bluetooth Sessions
+    [AddComponentMenu("BlueNet/Network Manager")]
     public class BlueNetManager : MonoBehaviour
     {
+        //instantiate a new network manager via context menu
+#if UNITY_EDITOR
+        [MenuItem("GameObject/BlueNet/NetworkManager")]
+        private static void CreateButton(MenuCommand menuCommand)
+        {
+            var go = new GameObject("Network_Manager");
+            go.AddComponent<BlueNetManager>();
+
+            GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+            Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+            Selection.activeObject = go;
+        }
+#endif
         private void OnApplicationQuit()
         {
             //clean up
