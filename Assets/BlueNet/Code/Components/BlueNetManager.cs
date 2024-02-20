@@ -73,10 +73,10 @@ namespace BlueNet
         public int DisconectedSceneIndex = -1;
 
         private float p_ping;
-        public float ping {
+        public static float ping {
             get
             {
-                return p_ping;
+                return Instance.p_ping;
             }
         }
 
@@ -131,12 +131,12 @@ namespace BlueNet
         static Dictionary<int, BlueNetObject> NetworkObjects=new Dictionary<int, BlueNetObject>();
 
         //register a blue net object, called by bluenet object when connected
-        public static bool RegisterNetworkObject(BlueNetObject Obj)
+        internal static bool RegisterNetworkObject(BlueNetObject Obj)
         {
             return NetworkObjects.TryAdd(Obj.NetworkID, Obj);
         }
         //remove bluenet object from register
-        public static void RemoveNetworkObject(BlueNetObject Obj)
+        internal static void RemoveNetworkObject(BlueNetObject Obj)
         {
             if(NetworkObjects.ContainsKey(Obj.NetworkID)){
                 NetworkObjects.Remove(Obj.NetworkID);
@@ -144,7 +144,7 @@ namespace BlueNet
         }
 
         //send an rpc over the transport
-        public static void SendRPC(NetworkCommand Command)
+        internal static void SendRPC(NetworkCommand Command)
         {
             netTransport.SendCommand(Command,false);
         }
