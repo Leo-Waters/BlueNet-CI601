@@ -23,6 +23,8 @@ This Project was made for the university of brighton CI601(Final year project) b
 <h4>Compression</h4>
 The Compression systems can be chosen via editing the properties of the Network manager component; these compressions systems help to increase network throughput at the cost of performance.
 
+
+
 <h5>Options</h5>
 
 - None, sends the data as a string.
@@ -32,6 +34,9 @@ The Compression systems can be chosen via editing the properties of the Network 
 - Gzip and Deflate, both algorithms compress the data before sending, and decompress the received data.
 
 - Parallel Gzip and Deflate, essentialy the same as the non parellel versions, however the work load is split into chunks based on the size of the data being sent, the chunks are then compressed on seperate threads for faster proccessing times with the drawback of a lower compression ratio.
+
+<h5>Issues</h5>
+Compression issues on Android, after some debugging it seems the c# system.io.compression libraries dont support android, so gzip and deflate will not work on android currently.
 
 <h4>prerequisites</h4>
 BlueNet Requires the 32 feet bluetooth package which gives access to bluetooth in c#, found here: https://github.com/inthehand/32feet;
