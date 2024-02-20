@@ -17,29 +17,27 @@ namespace BlueNet.Default
 
         private void OnEnable()
         {
-
             ListPrefab.SetActive(false);
             Refresh();
         }
-
-
 
         void AddDevice(KeyValuePair<string, string> device)
         {
             GameObject Listing = Instantiate(ListPrefab, Content, false);
 
+            //set text to device name
             Listing.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = device.Key;
-
+            //set color to not selected color
             Listing.GetComponent<UnityEngine.UI.Image>().color = NotSelectedColor;
-
+            //add click event
             Listing.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
             {
-                if (Selected != null)
+                if (Selected != null)//de select preivious device
                 {
                     Selected.GetComponent<UnityEngine.UI.Image>().color = NotSelectedColor;
                 }
                 Selected = Listing;
-
+                //set color as selected
                 Selected.GetComponent<UnityEngine.UI.Image>().color = SelectedColor;
 
             });
@@ -50,6 +48,7 @@ namespace BlueNet.Default
             Listing.SetActive(true);
         }
 
+        //get paired devices and list
         public void Refresh()
         {
             foreach (var item in DeviceList)
@@ -63,7 +62,7 @@ namespace BlueNet.Default
                 AddDevice(device);
             }
         }
-
+        //join selected device
         public void JoinSelected()
         {
             if (Selected != null)

@@ -57,6 +57,16 @@ namespace BlueNet.Demo
             Menu.SetActive(false);
         }
 
+        public void Quit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+
+        }
+
         public void SendChatMessageField(string value)
         {
             if (value.Contains("\n"))

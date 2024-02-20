@@ -147,6 +147,7 @@ namespace BlueNet.Demos.pong {
             
             netObj.SetVar("player1Score", 0);
             netObj.SetVar("player2Score", 0);
+
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

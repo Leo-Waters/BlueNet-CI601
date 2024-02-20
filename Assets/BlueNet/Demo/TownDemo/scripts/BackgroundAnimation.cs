@@ -20,6 +20,7 @@ namespace BlueNet.Demos
                     state = 1;
                 }
                 SyncedAnimator.SetInt("state", state);
+                //state is needed to be received before trigger so force is needed
                 SyncedAnimator.ForceUpdate();
                 SyncedAnimator.SetTrigger("start");
             }

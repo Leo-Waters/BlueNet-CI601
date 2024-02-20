@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6070990984305652218}
   - component: {fileID: 3699188290535668652}
   m_Layer: 0
-  m_Name: BeanAI (1)
+  m_Name: AI bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using BlueNet;
 namespace BlueNet.Demos {
-    public class BeanAI : MonoBehaviour
+    public class bot : MonoBehaviour
     {
         public BlueNetObject netObject;
         public NavMeshAgent agent;

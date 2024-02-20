@@ -4,7 +4,7 @@ using UnityEngine;
 using BlueNet;
 namespace BlueNet.Demos
 {
-    public class BeanPlayerControler : MonoBehaviour
+    public class PlayerControler : MonoBehaviour
     {
         public CharacterController controller;
         public SyncedTransform syncedTransform;
