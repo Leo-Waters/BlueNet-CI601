@@ -106,7 +106,6 @@ namespace BlueNet.Transports
         {
             isHost = false;
             Connected = false;
-            ThreadSafeEvents.Add("Disconected");
         }
 
         //Commands sent localy or recived by the connected client are buffered here so that the manager can decode and execute them

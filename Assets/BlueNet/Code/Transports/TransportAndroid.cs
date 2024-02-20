@@ -93,7 +93,7 @@ namespace BlueNet.Transports
             }
 
 
-            Connected = false;
+            isHost=Connected = false;
             ThreadSafeEvents.Add("disconnected");
         }
         //retrurn device list

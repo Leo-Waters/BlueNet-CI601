@@ -135,7 +135,7 @@ namespace BlueNet.Transports
                     {
                         Debug.Log("Client Disconect detected");
                         client.Close();
-                        Connected = false;
+                        isHost = Connected = false;
                         ThreadSafeEvents.Add("disconnected");
                         return;
                     }
