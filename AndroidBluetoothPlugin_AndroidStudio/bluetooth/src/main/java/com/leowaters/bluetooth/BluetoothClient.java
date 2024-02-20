@@ -7,6 +7,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class BluetoothClient {
@@ -102,11 +103,15 @@ public class BluetoothClient {
             byte[] buffer= new byte[1024];
             int bytesRead;
 
-            while (true){
+            while (socket.isConnected()){
                 try {
                     bytesRead=inputStream.read(buffer);
+                    if(bytesRead==-1){
+                        break;
+                    }
                     //send received bytes to c# code via callback
-                    Callback.OnRecivedMessage(Arrays.copyOf(buffer, bytesRead));
+                    byte[] array = Arrays.copyOf(buffer, bytesRead);
+                    Callback.OnRecivedMessage(ByteBuffer.wrap(array));
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;

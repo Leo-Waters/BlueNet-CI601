@@ -64,9 +64,13 @@ namespace BlueNet.Android
 		public event EventHandler onDisconnect_Evt;
 
 		//onRecivedJavaCallback
-		public void OnRecivedMessage(byte[] message)
+		public void OnRecivedMessage(AndroidJavaObject message)
 		{
-			onRecivedMessage_Evt?.Invoke(this, message);
+			sbyte[] incoming = message.Call<sbyte[]>("array");
+			byte[] converted = new byte[incoming.Length];
+			Buffer.BlockCopy(incoming, 0, converted, 0, converted.Length);
+			onRecivedMessage_Evt?.Invoke(this, converted);
+			
 		}
 		//OnConnectedJavaCallback
 		public void OnConnected()

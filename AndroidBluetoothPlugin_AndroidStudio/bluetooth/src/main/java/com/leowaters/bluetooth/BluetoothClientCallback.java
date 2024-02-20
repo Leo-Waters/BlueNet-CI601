@@ -1,8 +1,10 @@
 package com.leowaters.bluetooth;
 
+import java.nio.ByteBuffer;
+
 public interface BluetoothClientCallback
 {
-    void OnRecivedMessage(byte[] message);
+    void OnRecivedMessage(ByteBuffer array);
     void OnConnected();
     void OnDisconnect();
 }
