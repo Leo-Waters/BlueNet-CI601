@@ -46,6 +46,17 @@ namespace BlueNet.DataTypes
             value = Newvalue.ToString();
         }
 
+        public void Update(float Newvalue)
+        {
+            changed = true;
+            value = Newvalue.ToString();
+        }
+        public void Update(bool Newvalue)
+        {
+            changed = true;
+            value = Newvalue.ToString();
+        }
+
         //getters 
 
         public string GetString()
@@ -55,6 +66,14 @@ namespace BlueNet.DataTypes
         public int GetInt()
         {
             return int.Parse(value);
+        }
+        public float GetFloat()
+        {
+            return float.Parse(value);
+        }
+        public bool GetBool()
+        {
+            return bool.Parse(value);
         }
     }
 }

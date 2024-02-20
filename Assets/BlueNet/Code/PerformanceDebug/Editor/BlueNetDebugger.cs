@@ -80,7 +80,7 @@ namespace BlueNet.Test {
                         int objectUpdates = PerformanceDebugger.TotalObjectUpdatesSinceLastCheck();
 
                         TimeElapsed++;
-                        writer.WriteLine(string.Format("{0} {1} {2} {3} {4}", sentBytes, recivedBytes, objectUpdates, currentFPS, (int)MathF.Round(BlueNetManager.Instance.ping * 1000)));
+                        writer.WriteLine(string.Format("{0} {1} {2} {3} {4}", sentBytes, recivedBytes, objectUpdates, currentFPS, (int)MathF.Round(BlueNetManager.ping * 1000)));
                         if (TimeElapsed == MaxlogTimeInSeconds)
                         {
                             isLogging = false;
@@ -242,7 +242,7 @@ namespace BlueNet.Test {
                 GUILayout.Label("Total Bytes Sent: "+ PerformanceDebugger.TotalBytesSent);
                 GUILayout.Label("Total Bytes Recived: "+ PerformanceDebugger.TotalBytesRead);
                 GUILayout.Label("Total Object Updates Recived: "+ PerformanceDebugger.TotalObjectUpdates);
-                GUILayout.Label("Ping: "+ BlueNetManager.Instance.ping * 1000+" ms");
+                GUILayout.Label("Ping: "+ BlueNetManager.ping * 1000+" ms");
                 GUILayout.Label("FPS", EditorStyles.boldLabel);
                 currentFPS = (int)(1.0f / Time.smoothDeltaTime);
                 if (currentFPS > 60)

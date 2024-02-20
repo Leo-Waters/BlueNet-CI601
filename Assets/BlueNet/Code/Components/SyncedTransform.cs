@@ -10,8 +10,8 @@ namespace BlueNet{
     public class SyncedTransform : MonoBehaviour
     {
         BlueNetObject netObject;
-        public Vector3 LastPosition;
-        public Vector3 PredictedPosition;
+        Vector3 LastPosition;
+        Vector3 PredictedPosition;
 
         
 
@@ -42,7 +42,7 @@ namespace BlueNet{
             RotationEuler = transform.rotation.eulerAngles;
         }
         float UpdateDelay = 0;
-        public float TimeSinceLastMove;
+        float TimeSinceLastMove;
         private void Update()
         {
             if (!netObject.IsLocalyOwned)
@@ -72,7 +72,7 @@ namespace BlueNet{
                         if (sendVelocity)
                         {
                             diff = velocity;
-                            diff *= (BlueNetManager.Instance.ping/2);
+                            diff *= (BlueNetManager.ping/2);
                             PredictedPosition = LastPosition = transform.position;
                             netObject.SendRPC("RpcPosition", false, Converters.Vector3ToString(LastPosition + diff),Converters.Vector3ToString(velocity));
                         }
@@ -80,7 +80,7 @@ namespace BlueNet{
                         {
                             //perdict where this object might be by the time its recived
                             diff = (transform.position - LastPosition);
-                            diff *= (BlueNetManager.Instance.ping / 2);
+                            diff *= (BlueNetManager.ping / 2);
 
                             PredictedPosition = LastPosition = transform.position;
                             netObject.SendRPC("RpcPosition", false, Converters.Vector3ToString(LastPosition + diff));

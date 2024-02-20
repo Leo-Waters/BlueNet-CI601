@@ -14,7 +14,8 @@ namespace BlueNet
         public int NetworkID = 0;
 
         [Header("False if client has control")]
-        public bool HostIsOwner = true;
+        [SerializeField]
+        internal bool HostIsOwner = true;
 
         private bool p_IsLocalyOwned = false;
         public bool IsLocalyOwned { get { return p_IsLocalyOwned; } }
@@ -95,13 +96,31 @@ namespace BlueNet
             syncvar.Update(value);
             SyncVarChanged = true;
 
+            OnSyncVarUpdate?.Invoke(this, syncvar);
+        }
+        //set the value of a sync var with float 
+        public void SetVar(string tag, float value)
+        {
+            var syncvar = getVarByTag(tag);
+            syncvar.Update(value);
+            SyncVarChanged = true;
+
+            OnSyncVarUpdate.Invoke(this, syncvar);
+        }
+        //set the value of a sync var with bool 
+        public void SetVar(string tag, bool value)
+        {
+            var syncvar = getVarByTag(tag);
+            syncvar.Update(value);
+            SyncVarChanged = true;
+
             OnSyncVarUpdate.Invoke(this, syncvar);
         }
         //event called everytime a SyncVar is updated
         public event EventHandler<SyncVar> OnSyncVarUpdate;
 
         //used by manager to recive and update sync varibles 
-        public void ReciveNetworkUpdate(NetworkCommand networkCommand)
+        internal void ReciveNetworkUpdate(NetworkCommand networkCommand)
         {
             //Debug.LogWarning(networkCommand.ToString());
             string[] args = networkCommand.GetArgs();
@@ -114,7 +133,7 @@ namespace BlueNet
         }
 
         //send all updated syncvaribles to the other player
-        public void SendDataUpdate()
+        private void SendDataUpdate()
         {
             NetworkCommand command = new NetworkCommand();
             List<string> data = new List<string>();
@@ -248,7 +267,7 @@ namespace BlueNet
 
 
         //recive an rpc from the manager and propegate the message to attached components
-        public void ReciveRPC(NetworkCommand networkCommand)
+        internal void ReciveRPC(NetworkCommand networkCommand)
         {
             //Debug.Log(gameObject.name + "Recived RPC" + networkCommand.GetString(1));
 
