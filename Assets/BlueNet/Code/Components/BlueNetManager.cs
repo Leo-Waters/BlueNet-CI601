@@ -208,8 +208,9 @@ namespace BlueNet
             SetCompressionAlgoithm(ActiveCompressionAlgorithm);
         }
 
-        void SetCompressionAlgoithm(CompressionAlgorithmType type)
+        public void SetCompressionAlgoithm(CompressionAlgorithmType type)
         {
+            ActiveCompressionAlgorithm = type;
             switch (type)
             {
                 case CompressionAlgorithmType.gzip:

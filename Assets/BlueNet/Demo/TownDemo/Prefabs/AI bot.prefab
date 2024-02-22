@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89af65773ac3ea459cbf5e8133133b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NetworkID: 5
+  NetworkID: 28
   HostIsOwner: 1
   LocalPlayerOnlyBehaviours: []
   SyncVars: []
@@ -136,14 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853dbb3ab3e04614f905aaee5ebacdfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LastPosition: {x: 0, y: 0, z: 0}
-  PredictedPosition: {x: 0, y: 0, z: 0}
-  UpdateRate: 1
+  UpdateRate: 0.4
   TeleportDistance: 10
   UsePositionPerdiction: 1
   sendVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
-  TimeSinceLastMove: 0
 --- !u!114 &3699188290535668652
 MonoBehaviour:
   m_ObjectHideFlags: 0

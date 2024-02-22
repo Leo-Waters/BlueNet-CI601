@@ -6,9 +6,6 @@ using UnityEngine;
 
 namespace BlueNet.Compression
 {
-    //todo
-    //prefix message with length to counter overflow
-    //re-write process message in transport base to deal with this incoming change
     public enum CompressionAlgorithmType
     {
         none=0,

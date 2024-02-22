@@ -101,22 +101,30 @@ namespace BlueNet.Test {
 
                 if (SelectedTest.Contains("bots"))
                 {
-                    if (num == 10)
+                    bool exit = false;
+                    switch (num)
                     {
-                        num = 20;
+                        case 10:
+                            num = 50;
+                            break;
+                        case 50:
+                            num = 100;
+                            break;
+                        case 100:
+                            num = 200;
+                            break;
+                        case 200:
+                            num = 500;
+                            break;
+                        default:
+                            exit = true;
+                            break;
                     }
-                    else if(num==60)
-                    {
-                        num = 100;
-                    }else if (num < 60)
-                    {
-                        num += 20;
-                    }
-                    else
+                    if (exit)
                     {
                         break;
                     }
-                    SelectedTest = num.ToString() + SelectedTest.Substring(2);
+                    SelectedTest = num.ToString() + SelectedTest.Substring(SelectedTest.IndexOf("_"));
                     isLogging = true;
                     TimeElapsed = 0;
                 }
