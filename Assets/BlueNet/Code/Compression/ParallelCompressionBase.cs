@@ -11,7 +11,7 @@ namespace BlueNet.Compression
     public class ParallelCompressionBase : CompressionBase
     {
         //incoming data / threashold = amount of chunks/threads
-        const int ChunkSizeThreashold = 2500;
+        const int ChunkSizeThreashold = 62500;
         public override byte[] Compress(string value)
         {
             byte[] bytesValue = Encoding.UTF8.GetBytes(value);
