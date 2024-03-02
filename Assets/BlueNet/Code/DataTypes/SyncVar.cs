@@ -1,7 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*--------------------------------------------------------
+ *  BlueNet A Bluetooth Multiplayers solution for unity.
+ *  https://github.com/Leo-Waters/BlueNet-CI601
+ * 
+ *  Script: SyncVar for BlueNetObject
+ *  Created by leo waters
+ *  University Contact Email: l.waters3@uni.brighton.ac.uk
+ *  Personal Contact Email li0nleo117@gmail.com
+ * -------------------------------------------------------
+ */
 namespace BlueNet.DataTypes
 {
     [System.Serializable]
