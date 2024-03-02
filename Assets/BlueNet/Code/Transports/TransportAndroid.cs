@@ -27,7 +27,7 @@ namespace BlueNet.Transports
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
         //send all messages
-        public override void Send()
+        internal override void Send()
         {
             if (Connected)
             {
@@ -97,12 +97,12 @@ namespace BlueNet.Transports
             ThreadSafeEvents.Add("disconnected");
         }
         //retrurn device list
-        public override Dictionary<string, string> GetDevices()
+        internal override Dictionary<string, string> GetDevices()
         {
             return BluetoothPlugin.GetDevices();
         }
         //close the current connection
-        public override void CloseConnection()
+        internal override void CloseConnection()
         {
             if (isHost)
             {
@@ -124,7 +124,7 @@ namespace BlueNet.Transports
             base.CloseConnection();
         }
         //listern for a connecting device to join
-        public override void ListernForClient()
+        internal override void ListernForClient()
         {
             isHost = true;
 
@@ -132,7 +132,7 @@ namespace BlueNet.Transports
             base.ListernForClient();
         }
         //stop listerning
-        public override void StopListerningForClient()
+        internal override void StopListerningForClient()
         {
             isHost = false;
             listener.StopListerning();
@@ -140,7 +140,7 @@ namespace BlueNet.Transports
         }
 
         //connect to device
-        public override void ConnectToDevice(string address)
+        internal override void ConnectToDevice(string address)
         {
             client = new BluetoothClient();
             client.onConnected_Evt += Client_onConnected_Evt;

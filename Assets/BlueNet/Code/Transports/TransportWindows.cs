@@ -27,7 +27,7 @@ namespace BlueNet.Transports
         Thread AcceptClientThread, NetworkReadThread;
 
         //return paired device list
-        public override Dictionary<string,string> GetDevices()
+        internal override Dictionary<string,string> GetDevices()
         {
             var devices= new Dictionary<string, string>();
             foreach (var device in client.PairedDevices)
@@ -37,7 +37,7 @@ namespace BlueNet.Transports
             return devices;
         }
         //connect to device
-        public override void ConnectToDevice(string address)
+        internal override void ConnectToDevice(string address)
         {
             client = new BluetoothClient();
             client.Connect(BluetoothAddress.Parse(address), GetGuid());
@@ -58,7 +58,7 @@ namespace BlueNet.Transports
         }
 
         //start thread waiting for client
-        public override void ListernForClient()
+        internal override void ListernForClient()
         {
             isHost =IsListerning = true;
             Debug.Log("Waiting For BlueToothConnection");
@@ -78,7 +78,7 @@ namespace BlueNet.Transports
         }
 
         //cancel thread waiting for client
-        public override void StopListerningForClient()
+        internal override void StopListerningForClient()
         {
             if (AcceptClientThread != null)
             {
@@ -104,7 +104,7 @@ namespace BlueNet.Transports
             StartReadThread();
         }
         //closes connection to client
-        public override void CloseConnection()  { NetworkReadThread.Abort();  client.Close();  ThreadSafeEvents.Add("disconnected"); base.CloseConnection();  }
+        internal override void CloseConnection()  { NetworkReadThread.Abort();  client.Close();  ThreadSafeEvents.Add("disconnected"); base.CloseConnection();  }
         
         //start read and write background threads for data transmision
         void StartReadThread()
@@ -154,7 +154,7 @@ namespace BlueNet.Transports
         }
 
         //send Messages to client from Message buffer
-        public override void Send()
+        internal override void Send()
         {
             if (Connected)
             {

@@ -66,7 +66,7 @@ namespace BlueNet
 
 
         public CompressionAlgorithmType ActiveCompressionAlgorithm=CompressionAlgorithmType.none;
-        public static CompressionBase Compression;
+        internal static CompressionBase Compression;
         //used to identify the application
         public int GUID = 1234;
         //scen you want to load on disconnect, -1 = none

@@ -20,22 +20,22 @@ namespace BlueNet.Transports
         public static int TotalBytesRead;
         public static int TotalBytesSent;
 
-        internal int GUID = 1234;
+        protected int GUID = 1234;
 
-        internal bool Connected = false;
-        internal bool IsListerning = false;
-        internal bool isHost = false;
+        protected bool Connected = false;
+        protected bool IsListerning = false;
+        protected bool isHost = false;
 
         //getters-----------------------------------
 
         //is this transport the host
-        public bool IsHost()
+        internal bool IsHost()
         {
             return isHost;
         }
 
         //Returns a new GUID
-        public System.Guid GetGuid()
+        protected System.Guid GetGuid()
         {
             byte[] bytes = new byte[16];
             BitConverter.GetBytes(GUID).CopyTo(bytes, 0);
@@ -43,25 +43,25 @@ namespace BlueNet.Transports
         }
 
         //is the Transport connected to another device
-        public bool IsConnected()
+        internal bool IsConnected()
         {
             return Connected;
         }
         //is the Transport listerning for a joining client
-        public bool isListerningForClient()
+        internal bool isListerningForClient()
         {
             return IsListerning;
         }
 
-        public virtual Dictionary<string, string> GetDevices() { return null; }
+        internal virtual Dictionary<string, string> GetDevices() { return null; }
 
-        public virtual void Send()
+        internal virtual void Send()
         {
 
         }
 
         //gets the messages to send to the other player as compressed bytes
-        public byte[] GetMessage()
+        internal byte[] GetMessage()
         {
             string data = "";
 
@@ -95,14 +95,14 @@ namespace BlueNet.Transports
         //--------------------------------------------------------------------
 
         //listern for a device that wants to join
-        public virtual void ListernForClient() { IsListerning = true; }
+        internal virtual void ListernForClient() { IsListerning = true; }
         //stop listerning for a joining player
-        public virtual void StopListerningForClient() { IsListerning = false; }
+        internal virtual void StopListerningForClient() { IsListerning = false; }
         //connection to device
-        public virtual void ConnectToDevice(string address){}
+        internal virtual void ConnectToDevice(string address){}
 
         //closes connection to client, call base after overide
-        public virtual void CloseConnection()
+        internal virtual void CloseConnection()
         {
             isHost = false;
             Connected = false;
@@ -117,7 +117,7 @@ namespace BlueNet.Transports
         internal ConcurrentBag<string> Send_Messages = new ConcurrentBag<string>();
 
         //returns all newly recived network commands
-        public NetworkCommand[] GetCommands()
+        internal NetworkCommand[] GetCommands()
         {
             var ary = NetworkCommands.ToArray();
             NetworkCommands.Clear();
@@ -125,7 +125,7 @@ namespace BlueNet.Transports
         }
 
         //returns events to dispatch
-        public List<string> GetEvents()
+        internal List<string> GetEvents()
         {
             List<string> Events = new List<string>();
             while (!ThreadSafeEvents.IsEmpty)
@@ -147,7 +147,7 @@ namespace BlueNet.Transports
         }
 
         //Send a command to the other client with arguments
-        public void SendCommand(NetworkCommand command,bool SendToSelf)
+        internal void SendCommand(NetworkCommand command,bool SendToSelf)
         {
             Send_Messages.Add(command.ToString());
             if (SendToSelf)
